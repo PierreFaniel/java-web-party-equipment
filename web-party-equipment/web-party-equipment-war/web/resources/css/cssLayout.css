@@ -1,0 +1,151 @@
+
+#top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #036fab;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    border-bottom: solid #666666 2px;
+}
+
+#bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    clear: both;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+}
+.categ_nav_links{
+    margin-left: 10px;
+}
+
+#left {
+    position: absolute;
+    left: 0;
+    top: 10%;
+    font-size:16px;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+#right {
+    position: absolute;
+    right: 0;
+    top: 10%;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+#content {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    right: 5%;
+}
+.center_content {
+    position: relative;
+    padding: 5px;
+}
+
+.left_content {
+    padding: 5px;
+    margin-left: 170px;
+}
+
+.right_content {
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+.article_image {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.mini_article_image{
+    max-width : 75px;
+    max-height: 75px;
+}
+
+.promo_pourcentage{
+    color: darkorange;
+}
+.classe_categorie{
+    font-size: 28px;
+    margin: 7px;
+    padding: 3px;
+    background: lightgray;
+    border-radius: 5px;
+}
+#categories_liens{
+    alignment-adjust: central;
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+#columnTopHeader {
+    width: 100%;
+    padding: 0%;
+}
+
+.article_column {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.article_detail_cell{
+    margin : 10px;
+}
+
+.article_image_cell{
+    margin : 50px;
+}
+
+#detailArticle{
+    margin : 10px;
+    top: 25px;
+    position: absolute;
+}
+
+.tablePanier th{
+    color: black;
+    background: none;
+    background-color: #cccccc;
+    text-shadow: none;
+}
+
+.commander{
+    float: right;
+    text-align: right;
+    margin: 5px 5px 0 0;    
+}
+
+.boutonCommander{
+    padding:5px 0;
+}
+
+.messageErreur{
+    color: red;
+    font-weight: normal;
+    background-size: 15px;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    display: inline-block;
+}
