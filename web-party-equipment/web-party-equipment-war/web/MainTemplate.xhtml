@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!--<f:view locale="#{internationalizationMB.locale}">-->
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <f:loadBundle basename="language.lang" var="msg"/>
+        <title>Party Equipment</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top"></ui:insert>
+            <div id="topHeader"> 
+                <h:panelGrid id="columnTopHeader" columns="7">
+                    <h:link title="#{msg.goMainPage}" outcome="index.xhtml">
+                        <h:outputText value="#{msg.welcomePage}"/>
+                    </h:link>
+                    <h:outputText value="" />
+                    <h:outputText value="" />
+<!--                    <h:link title="#{msg.goBasket}" outcome="basket.xhtml">
+                        <h:graphicImage value="resources/images/basket.png" height="30" title="#{msg.basket}"/>
+                    </h:link>-->
+                    <h:outputText value="" />
+<!--                    <h:link outcome="connect.xhtml">
+                        <h:outputText value="#{msg.connect}" />
+                    </h:link>-->
+                    <h:panelGrid id="languagesFlags" columns="3">
+                        <h:form>
+<!--                            <h:commandLink action="#{internationalizationMB.setToEnglish()}">
+                                <img src="resources/images/englishFlag.png" height="20" title="English" />
+                            </h:commandLink>
+                            <h:commandLink action="#{internationalizationMB.setToFrench()}">
+                                <img src="resources/images/frenchFlag.png" height="20" title="Français" />
+                            </h:commandLink>
+                            <h:commandLink action="#{internationalizationMB.setToDutch()}">
+                                <img src="resources/images/dutchFlag.png" height="20" title="Nederlands" />
+                            </h:commandLink>-->
+                        </h:form>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </div>
+            <div id="topMenu">
+                
+            </div>
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left"></ui:insert>
+                <h:panelGrid columns="1">
+                    <h:link title="#{msg.goGamesCat}" outcome="index.xhtml">
+                        <h:outputText value="#{msg.games}" />
+                    </h:link>
+                    <h:link title="#{msg.goDecoCat}" outcome="index.xhtml">
+                        <h:outputText value="#{msg.decoration}" />
+                    </h:link>
+                    <h:link title="#{msg.goClothCat}" outcome="index.xhtml">
+                        <h:outputText value="#{msg.clothing}" />
+                    </h:link>
+                </h:panelGrid>
+<!--                <ul>
+                    <c:forEach items="#{categorieMB.categories}" var="categorie">
+                        <li>
+                            <h:link value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"
+                                    outcome="categories.xhtml">
+                                <f:param name="categorieID"
+                                         value="#{categorie.id}"/>
+                            </h:link>
+                        </li>
+                    </c:forEach>
+                </ul>-->
+
+            </div>
+            <div>
+                <div id="right">
+                    <ui:insert name="right"></ui:insert>
+                    Promo
+                </div>
+                <div id="content" class="right_content">
+                    <ui:insert name="content"></ui:insert>
+                    
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom"/>
+            <!--<h:link id="aproposLien" value="#{msg.apropos}" outcome="descriptionEntreprise.xhtml"/>-->
+             © Pierre Faniel et Guillaume de Wouters            
+        </div>
+
+    </h:body>
+</html>
