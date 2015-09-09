@@ -6,6 +6,7 @@
 package SessionBeans;
 
 import EntityBeans.Pays;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,5 +30,7 @@ public interface PaysFacadeLocal {
     List<Pays> findRange(int[] range);
 
     int count();
+    
+    ArrayList<Pays> findAllPays();
     
 }
