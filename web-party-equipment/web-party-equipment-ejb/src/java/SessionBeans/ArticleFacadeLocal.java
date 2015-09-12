@@ -31,10 +31,10 @@ public interface ArticleFacadeLocal {
 
     int count();
     
-    public ArrayList<Article> findArticlesParCategorie(Integer idCategorie);
+    ArrayList<Article> findArticlesParCategorie(Integer idCategorie);
     
-    public Article findArticleParId(Integer id);
+    Article findArticleParId(Integer id);
     
-    public ArrayList<Article> getArticlesParCategorie(Integer idCategorie);
+    ArrayList<Article> getArticlesParCategorie(Integer idCategorie);
     
 }

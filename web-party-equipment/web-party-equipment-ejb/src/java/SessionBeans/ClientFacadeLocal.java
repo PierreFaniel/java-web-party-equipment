@@ -31,8 +31,8 @@ public interface ClientFacadeLocal {
 
     int count();
     
-    public void create(Client client, ResourceBundle bundle) throws Exception;
+    void create(Client client, ResourceBundle bundle) throws Exception;
     
-    public Client findByEmail(String email);
+    Client findByEmail(String email);
     
 }

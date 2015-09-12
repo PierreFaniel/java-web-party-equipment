@@ -6,7 +6,10 @@
 package SessionBeans;
 
 import EntityBeans.Facture;
+import EntityBeans.Lignecommande;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -55,6 +58,28 @@ public class FactureFacade extends AbstractFacade<Facture> implements FactureFac
         catch(NoResultException e){
             return null;
         }
+    }
+    
+    @Override
+    public void create(ResourceBundle bundle, Facture facture){
+        create(facture);
+        em.flush();
+        facture.setLignecommandeCollection(ajoutLignesCommande(facture));
+        creerLigneCommande(facture);
+    }
+
+    private Collection<Lignecommande> ajoutLignesCommande(Facture facture) {
+        ArrayList<Lignecommande> lignesCommande = new ArrayList<>();
+        facture.getLignecommandeCollection().stream().forEach((ligneCmd) ->{
+            lignesCommande.add(ligneCmd);
+        });
+        return lignesCommande;
+    }
+
+    private void creerLigneCommande(Facture facture) {
+        facture.getLignecommandeCollection().stream().forEach((ligneCmd) ->{
+            lignecommandeFacade.create(ligneCmd);
+        });
     }
     
 }

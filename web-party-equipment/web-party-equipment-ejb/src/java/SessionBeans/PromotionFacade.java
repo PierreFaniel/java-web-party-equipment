@@ -6,9 +6,11 @@
 package SessionBeans;
 
 import EntityBeans.Promotion;
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,4 +30,14 @@ public class PromotionFacade extends AbstractFacade<Promotion> implements Promot
         super(Promotion.class);
     }
     
+    @Override
+    public Promotion findByCodePromo(String codePromo){
+        Query q = em.createNamedQuery("Promotion.findByCodepromo");
+        q.setParameter("codepromo", codePromo);
+        ArrayList<Promotion> promos = new ArrayList<>(q.getResultList());
+        if(promos.size() > 0)
+            return promos.get(0);
+        else
+            return null;
+    }
 }

@@ -6,7 +6,9 @@
 package SessionBeans;
 
 import EntityBeans.Facture;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.ejb.Local;
 
 /**
@@ -29,5 +31,9 @@ public interface FactureFacadeLocal {
     List<Facture> findRange(int[] range);
 
     int count();
+    
+    ArrayList<Facture> findParClient(Integer idClient) throws Exception;
+    
+    void create(ResourceBundle bundle, Facture facture);
     
 }

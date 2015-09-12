@@ -30,7 +30,4 @@ public interface CategorieFacadeLocal {
     List<Categorie> findRange(int[] range);
 
     int count();
-    
-    public ArrayList<Categorie> findAllCategories();
-    
 }

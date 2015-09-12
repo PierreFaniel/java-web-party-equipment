@@ -28,13 +28,4 @@ public class CategorieFacade extends AbstractFacade<Categorie> implements Catego
     public CategorieFacade() {
         super(Categorie.class);
     }
-    
-    @Override
-    public ArrayList<Categorie> findAllCategories() {
-        ArrayList<Categorie> listeCategories = new ArrayList<>();
-        findAll().stream().forEach((category)-> {
-            listeCategories.add(category);
-        });
-        return listeCategories;
-    }
 }
