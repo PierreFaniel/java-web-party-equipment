@@ -31,7 +31,7 @@ public class PaysMB {
     
     @PostConstruct
     public void init(){
-        setPays(paysFacade.findAllPays());
+        setPays(new ArrayList(paysFacade.findAll()));
     }
 
     public ArrayList<Pays> getPays() {

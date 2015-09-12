@@ -35,7 +35,7 @@ public class CategorieMB implements Serializable{
     
     @PostConstruct
     public void initCategories() {
-        categories = categorieFacade.findAllCategories();
+        categories = new ArrayList(categorieFacade.findAll());
     }
     
     public ArrayList<Categorie> getCategories() {
