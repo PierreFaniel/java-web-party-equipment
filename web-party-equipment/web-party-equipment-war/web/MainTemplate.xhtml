@@ -55,7 +55,7 @@
         <div>
             <div id="left">
                 <ui:insert name="left"></ui:insert>
-                <h:panelGrid columns="1">
+<!--                <h:panelGrid columns="1">
                     <h:link title="#{msg.goGamesCat}" outcome="index.xhtml">
                         <h:outputText value="#{msg.games}" />
                     </h:link>
@@ -65,18 +65,18 @@
                     <h:link title="#{msg.goClothCat}" outcome="index.xhtml">
                         <h:outputText value="#{msg.clothing}" />
                     </h:link>
-                </h:panelGrid>
-<!--                <ul>
+                </h:panelGrid>-->
+                <ul>
                     <c:forEach items="#{categorieMB.categories}" var="categorie">
                         <li>
                             <h:link value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"
                                     outcome="categories.xhtml">
                                 <f:param name="categorieID"
-                                         value="#{categorie.id}"/>
+                                         value="#{categorie.idCategorie}"/>
                             </h:link>
                         </li>
                     </c:forEach>
-                </ul>-->
+                </ul>
 
             </div>
             <div>

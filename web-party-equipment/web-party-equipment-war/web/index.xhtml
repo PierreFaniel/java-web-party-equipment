@@ -10,9 +10,9 @@
         <ui:composition template="./MainTemplate.xhtml">
 
             <ui:define name="content">
-                <h:outputText value="Hello World"/>
+                <h:outputText value="Hello World"/><br/>
                 <c:forEach items="#{paysMB.pays}" var="pays">
-                    <h:outputText value="Pays n° #{pays.idPays}"/>
+                    <h:outputText value="Pays n° #{pays.idPays}"/><br/>
                 </c:forEach>
                     
             </ui:define>

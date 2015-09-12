@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Article.findAll", query = "SELECT a FROM Article a"),
     @NamedQuery(name = "Article.findByIdArticle", query = "SELECT a FROM Article a WHERE a.idArticle = :idArticle"),
+    @NamedQuery(name = "Article.findParCategorie", query = "SELECT a FROM Article a WHERE a.idCategorie = :idCategorie"),
     @NamedQuery(name = "Article.findByPrixcatalogue", query = "SELECT a FROM Article a WHERE a.prixcatalogue = :prixcatalogue")})
 public class Article implements Serializable {
     private static final long serialVersionUID = 1L;

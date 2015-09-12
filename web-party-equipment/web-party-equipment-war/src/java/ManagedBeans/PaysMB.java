@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package ManagedBeans;
 
 import EntityBeans.Pays;
@@ -10,12 +11,12 @@ import SessionBeans.PaysFacadeLocal;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ApplicationScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
 /**
  *
- * @author Pierre
+ * @author Manotas
  */
 @Named(value="paysMB")
 @ApplicationScoped
@@ -24,8 +25,9 @@ public class PaysMB {
     private PaysFacadeLocal paysFacade;
     
     private ArrayList<Pays> pays;
-
-    public PaysMB() {}
+    
+    public PaysMB() {
+    }
     
     @PostConstruct
     public void init(){
@@ -39,4 +41,5 @@ public class PaysMB {
     public void setPays(ArrayList<Pays> pays){
         this.pays = pays;
     }
+    
 }
