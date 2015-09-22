@@ -6,6 +6,7 @@
 package SessionBeans;
 
 import EntityBeans.Article;
+import EntityBeans.Categorie;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Local;
@@ -31,10 +32,10 @@ public interface ArticleFacadeLocal {
 
     int count();
     
-    ArrayList<Article> findArticlesParCategorie(Integer idCategorie);
+    ArrayList<Article> findArticlesParCategorie(Categorie categorie);
     
     Article findArticleParId(Integer id);
     
-    ArrayList<Article> getArticlesParCategorie(Integer idCategorie);
+    ArrayList<Article> getArticlesParCategorie(Categorie categorie);
     
 }

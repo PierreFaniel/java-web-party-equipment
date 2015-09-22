@@ -74,6 +74,14 @@ public class Pays implements Serializable {
     public void setAdresseCollection(Collection<Adresse> adresseCollection) {
         this.adresseCollection = adresseCollection;
     }
+    
+    public String getLibelle(Langue langue){
+        for (Traductionpays tradPays: traductionpaysCollection){
+            if (tradPays.getLangue().equals(langue))
+                return tradPays.getLibelle();
+        }
+        return "";
+    }
 
     @Override
     public int hashCode() {

@@ -119,6 +119,22 @@ public class Article implements Serializable {
     public void setTraductionarticleCollection(Collection<Traductionarticle> traductionarticleCollection) {
         this.traductionarticleCollection = traductionarticleCollection;
     }
+    
+    public String getLibelle(Langue langue){
+        for (Traductionarticle tradArticle: traductionarticleCollection){
+            if (tradArticle.getLangue().equals(langue))
+                return tradArticle.getLibelle();
+        }
+        return "";
+    }
+    
+    public String getDescriptif(Langue langue){
+        for (Traductionarticle tradArticle: traductionarticleCollection){
+            if (tradArticle.getLangue().equals(langue))
+                return tradArticle.getDescriptif();
+        }
+        return "";
+    }
 
     @Override
     public int hashCode() {

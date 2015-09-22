@@ -8,7 +8,6 @@ package ManagedBeans;
 
 import EntityBeans.Categorie;
 import SessionBeans.CategorieFacadeLocal;
-//import SessionBeans.CategorieFacadeLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;

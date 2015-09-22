@@ -6,6 +6,7 @@
 package SessionBeans;
 
 import EntityBeans.Article;
+import EntityBeans.Categorie;
 import EntityBeans.Langue;
 import EntityBeans.Traductionarticle;
 import EntityBeans.TraductionarticlePK;
@@ -56,9 +57,9 @@ public class ArticleFacade extends AbstractFacade<Article> implements ArticleFac
     }
     
     @Override
-    public ArrayList<Article> findArticlesParCategorie(Integer idCategorie){
+    public ArrayList<Article> findArticlesParCategorie(Categorie categorie){
         ArrayList<Article> listeArticles = new ArrayList<>();
-        getArticlesParCategorie(idCategorie).stream().forEach((article) -> {
+        getArticlesParCategorie(categorie).stream().forEach((article) -> {
             listeArticles.add(article);
         });
         return listeArticles;
@@ -69,10 +70,10 @@ public class ArticleFacade extends AbstractFacade<Article> implements ArticleFac
     }
     
     @Override
-    public ArrayList<Article> getArticlesParCategorie(Integer idCategorie){
+    public ArrayList<Article> getArticlesParCategorie(Categorie categorie){
         Query q;
         q = em.createNamedQuery("Article.findParCategorie");
-        q.setParameter("idCategorie", idCategorie);
+        q.setParameter("idCategorie", categorie);
         return new ArrayList(q.getResultList());        
     }
 }

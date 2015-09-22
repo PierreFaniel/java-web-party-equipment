@@ -12,7 +12,7 @@
             <ui:define name="content">
                 <h:outputText value="Hello World"/><br/>
                 <c:forEach items="#{paysMB.pays}" var="pays">
-                    <h:outputText value="Pays n° #{pays.idPays}"/><br/>
+                    <h:outputText value="Pays n° #{pays.getLibelle(internationalizationMB.langueCourante)}"/><br/>
                 </c:forEach>
                     
             </ui:define>

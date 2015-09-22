@@ -28,11 +28,13 @@
                     <h:outputText value="" />
                     <h:outputText value="" />
                     <h:outputText value="" />
-                    <c:forEach items="#{internationalizationMB.langues}" var="langue">
-                        <h:commandLink action="#{internationalizationMB.setLangueCourante(langue)}">
-                            <img src="resources/images/#{langue.abreviation}.png" height="20" title="#{langue.libelle}" />
-                        </h:commandLink>
-                    </c:forEach>
+                    <h:form>
+                        <c:forEach items="#{internationalizationMB.langues}" var="langue">
+                            <h:commandLink action="#{internationalizationMB.setLangueCourante(langue)}">
+                                <img src="resources/images/#{langue.abreviation}.png" height="20" title="#{langue.libelle}" />
+                            </h:commandLink>
+                        </c:forEach>
+                    </h:form>
                 </h:panelGrid>
             </div>
             <div id="topMenu">
@@ -41,23 +43,14 @@
         </div>
         <div>
             <div id="left">
-                <ui:insert name="left"></ui:insert>
-<!--                <h:panelGrid columns="1">
-                    <h:link title="#{msg.goGamesCat}" outcome="index.xhtml">
-                        <h:outputText value="#{msg.games}" />
-                    </h:link>
-                    <h:link title="#{msg.goDecoCat}" outcome="index.xhtml">
-                        <h:outputText value="#{msg.decoration}" />
-                    </h:link>
-                    <h:link title="#{msg.goClothCat}" outcome="index.xhtml">
-                        <h:outputText value="#{msg.clothing}" />
-                    </h:link>
-                </h:panelGrid>-->
+                <ui:insert name="left">
+                    
+                </ui:insert>
                 <ul>
                     <c:forEach items="#{categorieMB.categories}" var="categorie">
                         <li>
                             <h:link value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"
-                                    outcome="categories.xhtml">
+                                    outcome="categorie.xhtml">
                                 <f:param name="categorieID"
                                          value="#{categorie.idCategorie}"/>
                             </h:link>
