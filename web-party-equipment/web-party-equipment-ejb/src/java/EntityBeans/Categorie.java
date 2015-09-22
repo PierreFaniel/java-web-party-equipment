@@ -74,7 +74,15 @@ public class Categorie implements Serializable {
     public void setTraductioncategorieCollection(Collection<Traductioncategorie> traductioncategorieCollection) {
         this.traductioncategorieCollection = traductioncategorieCollection;
     }
-
+    
+    public String getLibelle(Langue langue){
+        for (Traductioncategorie tradCateg: traductioncategorieCollection){
+            if (tradCateg.getLangue().equals(langue))
+                return tradCateg.getLibelle();
+        }
+        return "";
+    }   
+    
     @Override
     public int hashCode() {
         int hash = 0;

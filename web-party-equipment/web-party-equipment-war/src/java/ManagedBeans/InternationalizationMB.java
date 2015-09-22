@@ -50,6 +50,10 @@ public class InternationalizationMB implements Serializable {
         this.langues = langues;
     }
 
+    public ArrayList<Langue> getLangues(){
+        return langues;
+    }
+    
     public Langue getLangueCourante() {
         return langueCourante;
     }

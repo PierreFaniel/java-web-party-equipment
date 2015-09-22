@@ -6,6 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
+    
     <!--<f:view locale="#{internationalizationMB.locale}">-->
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -26,26 +27,12 @@
                     </h:link>
                     <h:outputText value="" />
                     <h:outputText value="" />
-<!--                    <h:link title="#{msg.goBasket}" outcome="basket.xhtml">
-                        <h:graphicImage value="resources/images/basket.png" height="30" title="#{msg.basket}"/>
-                    </h:link>-->
                     <h:outputText value="" />
-<!--                    <h:link outcome="connect.xhtml">
-                        <h:outputText value="#{msg.connect}" />
-                    </h:link>-->
-                    <h:panelGrid id="languagesFlags" columns="3">
-                        <h:form>
-<!--                            <h:commandLink action="#{internationalizationMB.setToEnglish()}">
-                                <img src="resources/images/englishFlag.png" height="20" title="English" />
-                            </h:commandLink>
-                            <h:commandLink action="#{internationalizationMB.setToFrench()}">
-                                <img src="resources/images/frenchFlag.png" height="20" title="Français" />
-                            </h:commandLink>
-                            <h:commandLink action="#{internationalizationMB.setToDutch()}">
-                                <img src="resources/images/dutchFlag.png" height="20" title="Nederlands" />
-                            </h:commandLink>-->
-                        </h:form>
-                    </h:panelGrid>
+                    <c:forEach items="#{internationalizationMB.langues}" var="langue">
+                        <h:commandLink action="#{internationalizationMB.setLangueCourante(langue)}">
+                            <img src="resources/images/#{langue.abreviation}.png" height="20" title="#{langue.libelle}" />
+                        </h:commandLink>
+                    </c:forEach>
                 </h:panelGrid>
             </div>
             <div id="topMenu">
