@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./MainTemplate.xhtml">
+            <ui:define name="content">
+                <h1>
+                    <h:outputText value="#{msg.titrePanier}"/>
+                </h1>
+                <c:if test="#{panierMB.panierVide()}">
+                    <h2>
+                        <h:outputText value="#{msg.panierVide}"/>
+                    </h2>
+                </c:if>
+                <c:if test="#{!panierMB.panierVide()}">
+                    <h:form id="formPanier">
+                       
+                        <p:dataTable id="tablePanier"
+                                     value="#{panierMB.listePanier}"
+                                     var="article" editable="true"
+                                     tableStyleClass="tablePanier" editMode="cell">
+                            <p:column headerText="#{msg.articlePanier}">
+                                <h:commandLink value="|X|" action="#{panierMB.removeArticle(article.key)}"/>
+                                <h:outputText value="  #{article.key.getLibelle(internationalizationMB.langueCourante)} "/>
+                                 
+                            </p:column>
+                            <p:column headerText="#{msg.prixArticle}">                                
+                                <h:outputText value="#{article.key.prixcatalogue}">
+                                    <f:convertNumber/>
+                                </h:outputText>
+                                <h:outputText value=" &euro;"/>
+                            </p:column>
+                            <p:column headerText="#{msg.articleQuantite}">
+                                <p:spinner value="#{panierMB.panier[article.key]}" min="1" max="999" size="1">
+                                    <f:validator validatorId="nombreValidator"/>
+                                    <f:convertNumber/>
+                                    <f:ajax event="blur" render="@form"/>
+                                </p:spinner>
+                            </p:column>
+                            <p:column headerText="#{msg.prixTotalLigne}">
+                                <h:outputText value="#{panierMB.sommeLigne(article.key)}">
+                                    <f:convertNumber/>
+                                </h:outputText>
+                                <h:outputText value=" &euro;"/>
+                               
+                            </p:column>
+                                
+                        </p:dataTable>
+                        <div class="commander">
+                            <p>
+                                <h:outputText value="#{msg.prixTotalPanier}: "/>
+                                <span class="total">
+                                    <h:outputText value="#{panierMB.sommePanier()}">
+                                        <f:convertNumber maxFractionDigits="2" minFractionDigits="0"/>
+                                    </h:outputText>
+                                    <h:outputText value=" &euro;"/>
+                                </span>
+                            </p>
+                            <p>
+                                <h:outputLabel value="#{msg.code_promo_input}: " for="codepromo"/>
+                                <h:inputText size="10" value="#{panierMB.codePromo}" id="codepromo">
+                                    <f:validator validatorId="promotionValidator"/>
+                                    <f:ajax render="erreurCodePromo" event="blur"/>
+                                </h:inputText>
+                                <span class="messageErreur">
+                                    <h:message for="codepromo" id="erreurCodePromo"/>
+                                </span>
+                                
+                                <h:commandButton styleClass="boutonCommander" 
+                                             value="#{msg.validerCodePromo}"
+                                             action="#{panierMB.validerCodePromo()}"/>
+                            </p>
+                            <p>
+                                <h:commandButton value="#{msg.commanderPanier}"
+                                             styleClass="boutonCommander" 
+                                             immediate="true"
+                                             action="faces/commande.xhtml"/>
+                            </p>
+                        </div>
+                    <h:commandButton styleClass="boutonCommander cornerLeft" value="#{msg.viderPanier}"
+                                     immediate="true"
+                                     action="#{panierMB.clearPanier()}"/>
+                    </h:form>
+                </c:if>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

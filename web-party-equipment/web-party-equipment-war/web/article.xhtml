@@ -31,12 +31,13 @@
                                         </b></p>
                                 <p>
                                     <h:outputText value="#{articleMB.findArticleParId(articleMB.idArt).getDescriptif(internationalizationMB.langueCourante)}"/>
-                                </p><p>                
-                                    <h:outputLabel id="libelleQuantite" value="#{msg.libelleQuantite}: " for="quantiteArticle"></h:outputLabel>
-                                        <p:spinner id="quantiteArticle" size="1" min="1" max="999" value="#{articleMB.quantiteArticle}"></p:spinner></p>
-                                    <h:commandButton id="ajouterAuPanier" value="#{msg.boutonAjoutPanier}"  action="#{panierMB.addArticle(articleMB.findArticleParId(articleMB.idArt), articleMB.quantiteArticle)}">
-                                        
-                                    </h:commandButton>                  
+                                </p>
+                                <p>                
+                                    <p:spinner id="quantiteArticle" size="6" min="1" max="999" value="#{articleMB.quantiteArticle}"></p:spinner>
+                                </p>
+                                <h:commandButton id="ajouterAuPanier" value="#{msg.boutonAjoutPanier}"  action="#{panierMB.addArticle(articleMB.findArticleParId(articleMB.idArt), articleMB.quantiteArticle)}">
+
+                                </h:commandButton>                  
                                </h:form>
                             </div>
                         </td>
