@@ -28,6 +28,7 @@ public class CategorieMB implements Serializable{
     
     
     private ArrayList<Categorie> categories;
+    private Integer idCat;
     
     public CategorieMB () {
     }
@@ -39,6 +40,14 @@ public class CategorieMB implements Serializable{
     
     public ArrayList<Categorie> getCategories() {
         return categories;
+    }
+
+    public Integer getIdCat() {
+        return idCat;
+    }
+
+    public void setIdCat(Integer idCat) {
+        this.idCat = idCat;
     }
 
     public CategorieFacadeLocal getCategorieFacade() {

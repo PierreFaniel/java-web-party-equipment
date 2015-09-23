@@ -8,25 +8,25 @@ package ManagedBeans;
 import EntityBeans.Article;
 import EntityBeans.Categorie;
 import SessionBeans.ArticleFacadeLocal;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author Pierre
  */
 @Named(value = "articleMB")
-@Dependent
-public class ArticleMB {
+@SessionScoped
+public class ArticleMB implements Serializable {
     @EJB
     private ArticleFacadeLocal articleFacade;
     private ArrayList<Article> listeArticle;
     private String libCategorie;
-    private Article article;
+    private Integer idArt;
     private Integer quantiteArticle = 1;
-
     
     public ArticleMB() {
     }
@@ -55,14 +55,14 @@ public class ArticleMB {
         this.listeArticle = listeArticle;
     }
 
-    public Article getArticle() {
-        return article;
+    public Integer getIdArt() {
+        return idArt;
     }
 
-    public void setArticle(Article article) {
-        this.article = article;
+    public void setIdArt(Integer idArt) {
+        this.idArt = idArt;
     }
-
+    
     public ArticleFacadeLocal getArticleFacade() {
         return articleFacade;
     }

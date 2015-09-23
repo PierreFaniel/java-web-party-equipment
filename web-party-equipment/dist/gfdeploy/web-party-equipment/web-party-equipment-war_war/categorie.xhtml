@@ -6,13 +6,13 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <f:metadata>
-        <f:viewParam id="categorie" name="categorie"/>
+        <f:viewParam name="categorieID" value="#{categorieMB.idCat}"/>
     </f:metadata>
     <body>
         <ui:composition template="./MainTemplate.xhtml">
             <ui:define name="content">
-                <h1><h:outputText value="#{categorieMB.getCategorie(param.categorieID).getLibelle(internationalizationMB.langueCourante)}"/></h1>
-                <h:dataTable value="#{articleMB.findArticleParCategorie(categorieMB.getCategorie(param.categorieID))}"
+                <h1><h:outputText value="#{categorieMB.getCategorie(categorieMB.idCat).getLibelle(internationalizationMB.langueCourante)}"/></h1>
+                <h:dataTable value="#{articleMB.findArticleParCategorie(categorieMB.getCategorie(categorieMB.idCat))}"
                              var="article">
                     <h:column class="article_column">
                         <h:link outcome="article.xhtml">
