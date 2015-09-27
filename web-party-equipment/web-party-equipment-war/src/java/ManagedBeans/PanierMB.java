@@ -6,8 +6,6 @@
 package ManagedBeans;
 
 import EntityBeans.Article;
-import EntityBeans.Client;
-import EntityBeans.Facture;
 import EntityBeans.Lignecommande;
 import EntityBeans.Promotion;
 import SessionBeans.FactureFacadeLocal;
@@ -16,7 +14,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
