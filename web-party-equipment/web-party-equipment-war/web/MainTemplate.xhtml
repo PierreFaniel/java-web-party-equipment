@@ -14,6 +14,7 @@
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <f:loadBundle basename="language.lang" var="msg"/>
         <title>Party Equipment</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
     </h:head>
 
     <h:body>
@@ -23,10 +24,10 @@
             <div id="topHeader"> 
                 <h:panelGrid id="columnTopHeader" columns="7">
                     <h:link title="#{msg.goMainPage}" outcome="index.xhtml">
-                        <h:outputText value="#{msg.welcomePage}"/>
+                        <i class="fa fa-home fa-2x" title="#{msg.welcomePage}"/>
                     </h:link>
                     <h:link title="#{msg.goBasket}" outcome="panier.xhtml">
-                        <h:graphicImage value="resources/images/basket.png" height="30" title="#{msg.basket}"/>
+                        <i class="fa fa-shopping-cart fa-2x" title="#{msg.basket}"/>
                     </h:link>
                     <h:outputText value="" />
                     <h:outputText value="" />

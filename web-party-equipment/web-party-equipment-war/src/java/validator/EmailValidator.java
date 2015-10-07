@@ -50,7 +50,7 @@ public class EmailValidator implements Validator{
     private ClientFacadeLocal lookupClientFacadeLocal(){
         try {
             Context c = new InitialContext();
-            return (ClientFacadeLocal) c.lookup("java:global/PartyEquipment/PartyEquipment-ejb/ClientFacade!entityFacadeSessionBeans.ClientFacadeLocal");
+            return (ClientFacadeLocal) c.lookup("java:global/web-party-equipment/web-party-equipment-ejb/ClientFacade!SessionBeans.ClientFacadeLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

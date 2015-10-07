@@ -20,14 +20,16 @@
                 </c:if>
                 <c:if test="#{!panierMB.panierVide()}">
                     <h:form id="formPanier">
-                       
                         <p:dataTable id="tablePanier"
                                      value="#{panierMB.listePanier}"
                                      var="article" editable="true"
                                      tableStyleClass="tablePanier" editMode="cell">
                             <p:column headerText="#{msg.articlePanier}">
-                                <h:commandLink value="|X|" action="#{panierMB.removeArticle(article.key)}"/>
-                                <h:outputText value="  #{article.key.getLibelle(internationalizationMB.langueCourante)} "/>
+                                <h:commandLink  action="#{panierMB.removeArticle(article.key)}"
+                                                style="color: firebrick">
+                                    <i class="fa fa-minus-circle"/>
+                                </h:commandLink>
+                                <h:outputText value=" #{article.key.getLibelle(internationalizationMB.langueCourante)}"/>
                                  
                             </p:column>
                             <p:column headerText="#{msg.prixArticle}">                                
@@ -48,10 +50,9 @@
                                     <f:convertNumber/>
                                 </h:outputText>
                                 <h:outputText value=" &euro;"/>
-                               
                             </p:column>
-                                
                         </p:dataTable>
+                        
                         <div class="commander">
                             <p>
                                 <h:outputText value="#{msg.prixTotalPanier}: "/>

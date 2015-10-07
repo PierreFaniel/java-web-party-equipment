@@ -35,9 +35,12 @@
                                 <p>                
                                     <p:spinner id="quantiteArticle" size="6" min="1" max="999" value="#{articleMB.quantiteArticle}"></p:spinner>
                                 </p>
-                                <h:commandButton id="ajouterAuPanier" value="#{msg.boutonAjoutPanier}"  action="#{panierMB.addArticle(articleMB.findArticleParId(articleMB.idArt), articleMB.quantiteArticle)}">
-
-                                </h:commandButton>                  
+                                <h:commandLink id="ajouterAuPanier"
+                                               action="#{panierMB.addArticle(articleMB.findArticleParId(articleMB.idArt), articleMB.quantiteArticle)}">
+                                    <i class="fa fa-plus"/> 
+                                    <h:outputText value=" #{msg.boutonAjoutPanier}"/>
+                                </h:commandLink>
+                                
                                </h:form>
                             </div>
                         </td>

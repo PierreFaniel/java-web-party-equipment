@@ -88,7 +88,7 @@ public class PromotionValidator implements Validator {
     private PromotionFacadeLocal lookupPromotionFacadeLocal() {
         try {
             Context c = new InitialContext();
-            return (PromotionFacadeLocal) c.lookup("java:global/PartyEquipment/PartyEquipment-ejb/PromotionFacade!entityFacadeSessionBeans.PromotionFacadeLocal");
+            return (PromotionFacadeLocal) c.lookup("java:global/web-party-equipment/web-party-equipment-ejb/PromotionFacade!SessionBeans.PromotionFacadeLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

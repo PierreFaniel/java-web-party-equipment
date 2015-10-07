@@ -114,7 +114,7 @@ public class PanierMB implements Serializable{
     public List<Map.Entry<Article,Integer>> getListePanier(){
         return new ArrayList(panier.entrySet());
     }
-    
+  
     public Double sommePanier(){
         double somme = 0.;
         for (Map.Entry<Article, BigDecimal> article : panier.entrySet()) {
