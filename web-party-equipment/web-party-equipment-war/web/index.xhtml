@@ -3,17 +3,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./MainTemplate.xhtml">
 
             <ui:define name="content">
-                <h:outputText value="Hello World"/><br/>
-                <c:forEach items="#{paysMB.pays}" var="pays">
-                    <h:outputText value="Pays n° #{pays.getLibelle(internationalizationMB.langueCourante)}"/><br/>
-                </c:forEach>
+                <section id="categories_liens">
+                    <h:panelGrid columns="#{categorieMB.categories.size()}">
+                        <c:forEach items="#{categorieMB.categories}" var="categorie">
+                            <h:link outcome="categorie.xhtml"
+                                    class="classe_categorie">
+                                <f:param name="categorieID" value="#{categorie.idCategorie}"/>
+                                <h:outputText value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"/>
+                            </h:link>
+                        </c:forEach>
+                    </h:panelGrid>
+                </section>
+                <br/>
+                <br/>
+                <section id="promotions">
+                    <c:set var="amountOfPromos" value="#{promotionMB.promotions.size()}"/>
+                        <c:if test="${amountOfPromos != 0}">
+                            <h1>
+                                <h:outputText value="#{msg.promotionsOfTheMoment}"/>
+                            </h1>                            
+                        </c:if>
+                        
+                    <h:panelGrid columns="5">
+                        <c:forEach items="#{promotionMB.promotions}" var="promotion">
+                            <h:link outcome="article.xhtml"
+                                class="classe_promo">
+                                <f:param name="articleID"
+                                         value="#{promotion.idArticle.idArticle}"/>
+                                
+                                <img class="mini_article_image" src="./resources/images/#{promotion.idArticle.idArticle}.png"/>
+                                
+                            </h:link>
+                            |
+                            <h:outputText class="promo_pourcentage" value="- #{promotion.pourcentage}%">
+                                    <f:convertNumber minFractionDigits="0"
+                                                     maxFractionDigits="2"/>
+                                </h:outputText>
+                            |
+                            <h:outputText value="#{promotion.codepromo}"/>
+                        </c:forEach>
+                    </h:panelGrid>
+                </section>
                     
             </ui:define>
 

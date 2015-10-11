@@ -20,16 +20,15 @@
                             <h:link outcome="article.xhtml"
                                 class="classe_promo">
                                 <f:param name="articleID"
-                                         value="#{promotion.articleEnPromo.id}"/>
+                                         value="#{promotion.idArticle.idArticle}"/>
                                 
-                                <img class="mini_article_image" src="./resources/images/#{promotion.articleEnPromo.id}.png"/>
+                                <img class="mini_article_image" src="./resources/images/#{promotion.idArticle.idArticle}.png"/>
                                 
                             </h:link>|
                             <h:outputText class="promo_pourcentage" value="- #{promotion.pourcentage}%">
                                     <f:convertNumber minFractionDigits="0"
                                                      maxFractionDigits="2"/>
                                 </h:outputText>|
-                            <h:outputText value="#{promotion.codePromo}"/>
                         </c:forEach>
                     </h:panelGrid>
                 </section>

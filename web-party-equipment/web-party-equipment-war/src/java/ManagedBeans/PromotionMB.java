@@ -27,7 +27,10 @@ public class PromotionMB implements Serializable{
     
     @PostConstruct
     public void init(){
-        promotions = (ArrayList<Promotion>)promotionFacade.findAll();
+        promotions = new ArrayList<>();
+        for (Promotion promo: promotionFacade.findAll()){
+            promotions.add(promo);
+        }
     }
 
     public ArrayList<Promotion> getPromotions() {
@@ -37,4 +40,6 @@ public class PromotionMB implements Serializable{
     public void setPromotions(ArrayList<Promotion> promotions) {
         this.promotions = promotions;
     }
+    
+    
 }
