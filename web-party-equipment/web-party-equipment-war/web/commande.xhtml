@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./MainTemplate.xhtml">
+
+            <ui:define name="content">
+                <c:if test="#{panierMB.panierVide()}">
+                    <f:event listener="#{clientMB.redirectionErreur()}" type="preRenderView"/>
+                </c:if>
+            <h1>#{msg.titreCommande}</h1>
+            <p:dataTable var="article" value="#{panierMB.listePanier}"
+                         tableStyleClass="tablePanier">
+                <p:column headerText="#{msg.articlePanier}">
+                    <h:outputText value="  #{article.key.getLibelle(internationalizationMB.langueCourante)} "/>
+                </p:column>
+                <p:column headerText="#{msg.prixArticle}">                                
+                    <h:outputText value="#{article.key.prixcatalogue}">
+                        <f:convertNumber/>
+                    </h:outputText>
+                    <h:outputText value=" &euro;"/>
+                </p:column>
+                <p:column headerText="#{msg.articleQuantite}">
+                    <h:outputText value="#{panierMB.panier[article.key]}">                        
+                        <f:convertNumber/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg.prixTotalLigne}">
+                    <h:outputText value="#{panierMB.sommeLigne(article.key)}">
+                        <f:convertNumber/>
+                    </h:outputText>
+                    <h:outputText value=" &euro;"/>
+                </p:column>
+            </p:dataTable>
+            <div class="commander">
+                <p>
+                    <h:outputText value="#{msg.totalCommande}: "/>
+                    <span class="total">
+                        <h:outputText value="#{panierMB.sommePanier()}">
+                            <f:convertNumber maxFractionDigits="2" minFractionDigits="0"/>
+                        </h:outputText>
+                        <h:outputText value=" &euro;"/>
+                    </span>
+                </p>
+                <p>
+                    <h:link value="#{msg.commanderPanier}"
+                                 styleClass="boutonCommander"
+                                  outcome="confirmationCommande.xhtml"/>
+                </p>
+            </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
