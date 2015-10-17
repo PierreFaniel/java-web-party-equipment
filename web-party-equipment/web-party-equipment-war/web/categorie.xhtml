@@ -14,8 +14,8 @@
                 <ui:include src="categorieNav.xhtml"/>
             </ui:define>
             <ui:define name="content">
-                <h1><h:outputText value="#{categorieMB.getCategorie(categorieMB.idCat).getLibelle(internationalizationMB.langueCourante)}"/></h1>
-                <h:dataTable value="#{articleMB.findArticleParCategorie(categorieMB.getCategorie(categorieMB.idCat))}"
+                <h2 class="text-primary"><h:outputText value="#{categorieMB.getCategorie(categorieMB.idCat).getLibelle(internationalizationMB.langueCourante)}"/></h2>
+                <h:dataTable class="col-md-5" value="#{articleMB.findArticleParCategorie(categorieMB.getCategorie(categorieMB.idCat))}"
                              var="article">
                     <h:column class="article_column">
                         <h:link outcome="article.xhtml">
