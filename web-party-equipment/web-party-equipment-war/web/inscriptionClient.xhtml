@@ -13,7 +13,7 @@
                     <f:event listener="#{clientMB.retourIndex()}" 
                              type="preRenderView"/>
                 </c:if>
-                <h1><h:outputText value="#{msg.inscription_title}"/></h1>
+                <h2 class="text-primary text-center"><h:outputText value="#{msg.inscription_title}"/></h2>
                 <h:form id="formInscription">
                     <div class=" row col-lg-12">
                         <div id="informationClient" class="col-md-4 col-md-offset-2">
@@ -30,10 +30,10 @@
                                                 event="blur"/>
                                         <f:validator validatorId="emailValidator"/>
                                     </h:inputText></div>  
-                                    <span class="messageErreur">
-                                        <h:message id="erreurEmail" for="inputEmail"/>
-                                    </span>
-                                               
+                                <span class="text-warning">
+                                    <h:message id="erreurEmail" for="inputEmail"/>
+                                </span>
+
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
@@ -49,10 +49,10 @@
                                                 render="erreurMotDePasse erreurConfirmationMotDePasse"
                                                 event="blur"/>
                                     </h:inputSecret></div>
-                                    <span class="messageErreur">
-                                        <h:message id="erreurMotDePasse" for="motDePasse"/>
-                                    </span>
-                                
+                                <span class="text-warning">
+                                    <h:message id="erreurMotDePasse" for="motDePasse"/>
+                                </span>
+
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
@@ -66,10 +66,10 @@
                                                      value="#{composantMotDePasse}"/>
                                         <f:validator validatorId="confirmationMotDePasseValidator"/>
                                     </h:inputSecret></div>
-                                    <span class="messageErreur">
-                                        <h:message id="erreurConfirmationMotDePasse" for="confirmationMotDePasse"/>
-                                    </span>
-                                
+                                <span class="text-warning">
+                                    <h:message id="erreurConfirmationMotDePasse" for="confirmationMotDePasse"/>
+                                </span>
+
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
@@ -83,10 +83,10 @@
                                         <f:validateRegex pattern="^\D{2,}$"/>
                                         <f:ajax render="erreurPrenom" event="blur"/>
                                     </h:inputText></div>
-                                    <span class="messageErreur">
-                                        <h:message id="erreurPrenom" for="prenom"/>
-                                    </span>
-                                
+                                <span class="text-warning">
+                                    <h:message id="erreurPrenom" for="prenom"/>
+                                </span>
+
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
@@ -100,10 +100,10 @@
                                         <f:validateRegex pattern="^\D{2,}$"/>
                                         <f:ajax render="erreurNom" event="blur"/>
                                     </h:inputText>
-                            </div>
-                                    <span class="messageErreur">
-                                        <h:message id="erreurNom" for="nom"/>
-                                    </span>
+                                </div>
+                                <span class="text-warning">
+                                    <h:message id="erreurNom" for="nom"/>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
@@ -116,7 +116,7 @@
                                         <f:ajax render="erreurNumTelephone" event="blur"/>
                                     </h:inputText>
                                 </div>
-                                <span class="messageErreur">
+                                <span class="text-warning">
                                     <h:message id="erreurNumTelephone" for="numTelephone"/>
                                 </span>
                             </div>
@@ -133,8 +133,8 @@
                                         <f:ajax render="erreurRue" event="blur"/>                            
                                     </h:inputText>
                                 </div>
-                                    
-                                <span class="messageErreur">
+
+                                <span class="text-warning">
                                     <h:message id="erreurRue" for="rue"/>
                                 </span>
                             </div>
@@ -148,7 +148,7 @@
                                         <f:ajax render="erreurNumero" event="blur"/>                            
                                     </h:inputText>
                                 </div>
-                                <span class="messageErreur">
+                                <span class="text-warning">
                                     <h:message id="erreurNumero" for="numero"/>
                                 </span>
                             </div>
@@ -163,26 +163,26 @@
                                         <f:ajax render="erreurLocalite" event="blur"/>                            
                                     </h:inputText>                                    
                                 </div>
-                                    
-                                    <span class="messageErreur">
-                                        <h:message id="erreurLocalite" for="localite"/>
-                                    </span>
+
+                                <span class="text-warning">
+                                    <h:message id="erreurLocalite" for="localite"/>
+                                </span>
                             </div>
                             <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon">#{msg.formCodePostal}</span>
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formCodePostal}</span>
                                     <h:inputText id="codePostal" class="form-control"
                                                  value="#{clientMB.client.idAdresse.codepostal}"
                                                  required="true" requiredMessage="#{msg.codePostalRequis}">
                                         <f:ajax render="erreuCodePostal" event="blur"/>   
                                     </h:inputText>
+                                </div>
+                                <span class="text-warning">
+                                    <h:message id="erreuCodePostal" for="codePostal"/>
+                                </span>
+
                             </div>
-                                    <span class="messageErreur">
-                                        <h:message id="erreuCodePostal" for="codePostal"/>
-                                    </span>
-                            
-                            </div>
-                            <div class="input-group">
+                            <div class="input-group col-lg-12">
                                 <h:outputLabel for="pays" value="#{msg.formPays}"/>
                                 <h:selectOneMenu id="pays" class="form-control"
                                                  value="#{clientMB.client.idAdresse.idPays}">
@@ -197,8 +197,8 @@
 
 
                     <div class="col-lg-12 center-block">                           
-                            <h:commandButton class="btn btn-primary center-block" value="#{msg.boutonValider}"
-                                             action="#{clientMB.inscription2()}"/>
+                        <h:commandButton class="btn btn-primary center-block" value="#{msg.boutonValider}"
+                                         action="#{clientMB.inscription2()}"/>
                     </div>
                 </h:form>
             </ui:define>

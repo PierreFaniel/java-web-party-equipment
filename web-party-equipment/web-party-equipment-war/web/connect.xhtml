@@ -13,43 +13,50 @@
                     <f:event listener="#{clientMB.retourIndex()}" 
                              type="preRenderView"/>
                 </c:if>
-                <h1><h:outputText value="#{msg.connexionTitle}"/></h1>
+                <h2 class="text-center text-primary"><h:outputText value="#{msg.connexionTitle}"/></h2>
                 <h:form>
-                    <div class="divconnexion">
-                        <p>
-                            <h:outputLabel   value="#{msg.formEmail}:"
-                                             for="email" /><br/>
-                            <h:inputText id="email" class="inputTextLong"
+                    <div class="container col-md-12">
+                        <div class="col-md-offset-4 col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formEmail}</span>
+                            <h:inputText id="email" class="form-control"
                                          required="true"
                                          maxlength="100"
                                          requiredMessage="#{msg.emailRequired}"
                                          value="#{clientMB.infosConnexion.email}">
                                 <f:ajax render="erreurEmail" event="blur"/>
-                            </h:inputText>
-                            <span class="messageErreur">
+                            </h:inputText></div>
+                            <span class="text-warning">
                                 <h:message id="erreurEmail" for="email"/>
                             </span>
-                        </p>
-                        <p>
-                            <h:outputLabel   value="#{msg.formMotDePasse}:"
-                                             for="motDePasse" /><br/>
-                            <h:inputSecret id="motDePasse" class="inputTextLong"
+                            </div>
+                                
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formMotDePasse}</span>
+                            <h:inputSecret id="motDePasse" class="form-control"
                                          required="true"
                                          maxlength="50"
                                          requiredMessage="#{msg.motDePasseRequis}"
                                          value="#{clientMB.infosConnexion.motDePasse}">
                                 <f:ajax render="erreurMotDePasse" event="blur"/>
                             </h:inputSecret>
-                            <span class="messageErreur">
+                            </div>
+                            <span class="text-warning">
                                 <h:message id="erreurMotDePasse" for="motDePasse"/>
                             </span>
-                        </p>
-                        <p>
-                            <h:commandButton value="#{msg.connexion}"
-                                             action="#{clientMB.connexion()}"/>
-                        </p>
-                        <h:link value="#{msg.inscription}" outcome="inscriptionClient.xhtml"/>
-                    </div>         
+                            </div>
+                        
+                    
+                            <div class="center-block">
+                                <h:commandButton class="col-md-12 btn btn-primary center-block" value="#{msg.connexion}"
+                                              action="#{clientMB.connexion()}"/>
+                            </div>
+                        
+                            <h:link value="#{msg.inscription}" outcome="inscriptionClient.xhtml"/>
+                        </div>
+                    </div>       
                 </h:form>
             </ui:define>
         </ui:composition>
