@@ -8,18 +8,25 @@
     <f:metadata>
         <f:viewParam name="articleID" value="#{articleMB.idArt}"/>
     </f:metadata>
+    <h:head>
+        
+            <h:outputScript name="./js/article.js"/>
+    </h:head>
     <h:body>
+        
         <ui:composition template="./MainTemplate.xhtml">
+            <ui:define name="left">
+                <ui:include src="categorieNav.xhtml"/>
+            </ui:define>
             <ui:define name="content">
-                <h1>
+                <h2 class="col-md-offset-2 text-primary">
                     <h:outputText id="titreArticle" value="#{articleMB.findArticleParId(articleMB.idArt).getLibelle(internationalizationMB.langueCourante)}"/>
-                </h1>
-                <table>
-                    <tr>
-                        <td class="article_image_cell">
+                </h2>
+                <div class="container mg-top-10 col-md-12 row">
+                        <div class="col-md-3 col-md-offset-1">
                             <img class="article_image" src="./resources/images/#{articleMB.idArt}.png"/>
-                        </td>
-                        <td class="article_detail_cell">
+                        </div>
+                        <div class="col-md-4 col-md-offset-1">
                             <div id="detailArticle">
                                 
                                 <h:form id="formArticle"> 
@@ -36,18 +43,18 @@
                                     <p:spinner id="quantiteArticle" size="6" min="1" max="999" value="#{articleMB.quantiteArticle}"></p:spinner>
                                 </p>
                                 <h:commandLink id="ajouterAuPanier"
+                                               class="btn btn-primary"
+                                               onclick="lel()"
                                                action="#{panierMB.addArticle(articleMB.findArticleParId(articleMB.idArt), articleMB.quantiteArticle)}">
                                     <i class="fa fa-plus"/> 
                                     <h:outputText value=" #{msg.boutonAjoutPanier}"/>
-                                </h:commandLink>
-                                
+                                </h:commandLink>                                
                                </h:form>
                             </div>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>           
             </ui:define>
         </ui:composition>
-
+        
     </h:body>
 </html>

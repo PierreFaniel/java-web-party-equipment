@@ -17,6 +17,10 @@
     font-size: 1.42em !important;
 }
 
+.mg-top-10{
+    margin-top: 10px;
+}
+
 #left {
     position: absolute;
     left: 1%;

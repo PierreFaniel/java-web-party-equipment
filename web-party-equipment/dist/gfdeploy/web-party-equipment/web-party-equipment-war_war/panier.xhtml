@@ -9,6 +9,9 @@
 
     <body>
         <ui:composition template="./MainTemplate.xhtml">
+            <ui:define name="left">
+                <ui:include src="categorieNav.xhtml"/>
+            </ui:define>
             <ui:define name="content">
                 <h1>
                     <h:outputText value="#{msg.titrePanier}"/>
