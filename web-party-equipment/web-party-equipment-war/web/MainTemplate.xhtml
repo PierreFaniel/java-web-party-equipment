@@ -12,14 +12,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
+        
+        <h:outputStylesheet name="./css/bootstrap.min.css"/>
         <f:loadBundle basename="language.lang" var="msg"/>
-        <script type="text/javascript" src="js/jquery-1.11.3.min.js"/>
         <title>Party Equipment</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
     </h:head>
 
     <h:body>
-
+        
         <div id="top">
             <ui:insert name="top"></ui:insert>
             <div id="topHeader"> 
@@ -68,7 +69,7 @@
                 </ui:insert>
                 <ul>
                     <c:forEach items="#{categorieMB.categories}" var="categorie">
-                        <li>
+                        <li style="list-style-type: none;">
                             <h:link value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"
                                     outcome="categorie.xhtml">
                                 <f:param name="categorieID"
@@ -95,7 +96,9 @@
             <!--<h:link id="aproposLien" value="#{msg.apropos}" outcome="descriptionEntreprise.xhtml"/>-->
              © Pierre Faniel et Guillaume de Wouters            
         </div>
-
+        
+        <h:outputScript library="js" name="./js/jquery-1.11.3.min.js"/>
+        <h:outputScript library="js" name="./js/bootstrap.min.js"/>
     </h:body>
     </f:view>
 </html>
