@@ -11,19 +11,6 @@
         <ui:composition template="./MainTemplate.xhtml">
 
             <ui:define name="content">
-                <section id="categories_liens">
-                    <h:panelGrid columns="#{categorieMB.categories.size()}">
-                        <c:forEach items="#{categorieMB.categories}" var="categorie">
-                            <h:link outcome="categorie.xhtml"
-                                    class="classe_categorie">
-                                <f:param name="categorieID" value="#{categorie.idCategorie}"/>
-                                <h:outputText value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"/>
-                            </h:link>
-                        </c:forEach>
-                    </h:panelGrid>
-                </section>
-                <br/>
-                <br/>
                 <section id="promotions">
                     <c:set var="amountOfPromos" value="#{promotionMB.promotions.size()}"/>
                         <c:if test="${amountOfPromos != 0}">
