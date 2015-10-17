@@ -20,7 +20,7 @@
 
         <h:body>
             <ui:insert name="top">
-                <nav class="navbar navbar-default">
+                <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
@@ -36,33 +36,33 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li>
+                                <li class="navbar-li">
                                     <h:link title="#{msg.goMainPage}" outcome="index.xhtml">
                                         <i class="fa fa-home fa-1-5x" title="#{msg.welcomePage}"/>
                                     </h:link>
                                 </li>
                                 <c:choose>
                                     <c:when test="#{!clientMB.infosConnexion.connecte}">
-                                        <li>
+                                        <li class="navbar-li">
                                             <h:link outcome="connect.xhtml">
                                                 <h:outputText value="#{msg.connect}" />
                                             </h:link>
                                         </li>
                                     </c:when>
                                     <c:when test="#{clientMB.infosConnexion.connecte}">
-                                        <li>
+                                        <li class="navbar-li">
                                             <h:link outcome="#{clientMB.editerClient()}">
                                                 <h:outputText value="#{clientMB.client.email}" />
                                             </h:link>
                                         </li>
-                                        <li>
+                                        <li class="navbar-li">
                                             <h:link value="#{clientMB.deconnexion()}">
                                                 <h:outputText value="#{msg.deconnexion}"/>
                                             </h:link>
                                         </li>
                                     </c:when>
                                 </c:choose>
-                                <li>
+                                <li class="navbar-li">
                                     <h:link title="#{msg.goBasket}" outcome="panier.xhtml">
                                         <i class="fa fa-shopping-cart fa-1-5x" title="#{msg.basket}"/>
                                     </h:link>
@@ -90,9 +90,9 @@
 
             <div id="left">
                 <ui:insert name="left">
-                    <ul class="nav nav-pills nav-stacked">
+                    <ul class="nav nav-stacked">
                         <c:forEach items="#{categorieMB.categories}" var="categorie">
-                            <li>
+                            <li role="presentation">
                                 <h:link outcome="categorie.xhtml">
                                     <f:param name="categorieID" value="#{categorie.idCategorie}"/>
                                     <h:outputText value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"/>
