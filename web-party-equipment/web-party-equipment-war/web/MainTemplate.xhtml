@@ -11,7 +11,7 @@
         <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <h:outputStylesheet name="./css/cssLayout.css"/>
-            <link rel="icon" type="image/png" href="./img/favicon.png" />
+            <link rel="icon" type="image/png" sizes="192x192"  href="./images/favicon.png"/>
             <h:outputStylesheet name="./css/bootstrap.min.css"/>
             <f:loadBundle basename="language.lang" var="msg"/>
             <title>Party Equipment</title>
@@ -62,24 +62,41 @@
                                         </li>
                                     </c:when>
                                 </c:choose>
-                                <li class="navbar-li">
-                                    <h:link title="#{msg.goBasket}" outcome="panier.xhtml">
-                                        <i class="fa fa-shopping-cart fa-1-5x" title="#{msg.basket}"/>
-                                    </h:link>
+                                <li class="dropdown navbar-li">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msg.titreCategories}<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <c:forEach items="#{categorieMB.categories}" var="categorie">
+                                            <li>
+                                                <h:link outcome="categorie.xhtml">
+                                                    <f:param name="categorieID" value="#{categorie.idCategorie}"/>
+                                                    <h:outputText value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"/>
+                                                </h:link>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
                                 </li>
                             </ul>
                             <h:form>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <c:forEach items="#{internationalizationMB.langues}" var="langue">
+                                    <li class="navbar-li">
+                                        <h:link title="#{msg.goBasket}" outcome="panier.xhtml">
+                                            <i class="fa fa-shopping-cart fa-1-5x" title="#{msg.basket}"/>
+                                        </h:link>
+                                    </li>
+                                    <li class="dropdown navbar-li">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msg.languesTitre}<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                           <c:forEach items="#{internationalizationMB.langues}" var="langue">
                                         <li>
                                             <h:commandLink action="#{internationalizationMB.setLangueCourante(langue)}">
-                                                <img src="resources/images/#{langue.abreviation}.png" height="20" title="#{langue.libelle}" />
-
+                                                <img src="resources/images/#{langue.abreviation}.png" height="12" title="#{langue.libelle}" />
+                                                <h:outputText value=" #{langue.libelle}"/>
                                             </h:commandLink>
                                         </li>
                                     </c:forEach>
-
-
+                                        </ul>
+                                    </li>
+                                    
                                 </ul></h:form>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
@@ -90,16 +107,6 @@
 
             <div id="left">
                 <ui:insert name="left">
-                    <ul class="nav nav-stacked">
-                        <c:forEach items="#{categorieMB.categories}" var="categorie">
-                            <li role="presentation">
-                                <h:link outcome="categorie.xhtml">
-                                    <f:param name="categorieID" value="#{categorie.idCategorie}"/>
-                                    <h:outputText value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"/>
-                                </h:link>
-                            </li>
-                        </c:forEach>
-                    </ul>
                 </ui:insert>
             </div>
             <div id="right">
@@ -114,11 +121,11 @@
             <div id="bottom">
                 <ui:insert name="bottom"/>
                 <h:link id="aproposLien" value="#{msg.apropos}" outcome="descriptionEntreprise.xhtml"/>
-                © Pierre Faniel et Guillaume de Wouters            
+                © Pierre Faniel &amp; Guillaume de Wouters            
             </div>
 
-            <h:outputScript library="js" name="./js/jquery-1.11.3.min.js"/>
-            <h:outputScript library="js" name="./js/bootstrap.min.js"/>
+            <h:outputScript name="./js/jquery-1.11.3.min.js"/>
+            <h:outputScript name="./js/bootstrap.min.js"/>
         </h:body>
     </f:view>
 </html>
