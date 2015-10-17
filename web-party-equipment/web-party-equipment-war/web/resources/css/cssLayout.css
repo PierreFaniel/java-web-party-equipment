@@ -149,3 +149,7 @@
     padding-left: 20px;
     display: inline-block;
 }
+
+.white-font-color{
+    color: #FFFFFF !important;
+}

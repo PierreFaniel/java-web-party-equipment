@@ -20,65 +20,65 @@
     </h:head>
 
     <h:body>
-        
-        <div id="top">
-            <ui:insert name="top"></ui:insert>
-            <div id="topHeader"> 
-                <h:panelGrid id="columnTopHeader" columns="7">
-                    <h:link title="#{msg.goMainPage}" outcome="index.xhtml">
-                        <i class="fa fa-home fa-2x" title="#{msg.welcomePage}"/>
+        <ui:insert name="top">
+            <ul class="nav nav-pills navbar-default">
+                <li role="presentation">
+                    <h:link title="#{msg.goMainPage}" class="white-font-color" outcome="index.xhtml">
+                        <i class="fa fa-home" title="#{msg.welcomePage}"/>
                     </h:link>
-                    <h:link title="#{msg.goBasket}" outcome="panier.xhtml">
-                        <i class="fa fa-shopping-cart fa-2x" title="#{msg.basket}"/>
+                </li>
+                <li role="presentation">
+                    <h:link title="#{msg.goBasket}" outcome="panier.xhtml" class="white-font-color">
+                        <i class="fa fa-shopping-cart" title="#{msg.basket}"/>
                     </h:link>
-                    <h:outputText value="" />
-                    <h:outputText value="" />
-                    <h:outputText value="" />
-                    <c:choose>
-                        <c:when test="#{!clientMB.infosConnexion.connecte}">
-                            <h:link outcome="connect.xhtml">
+                </li>
+
+                <c:choose>
+                    <c:when test="#{!clientMB.infosConnexion.connecte}">
+                        <li role="presentation">
+                            <h:link class="white-font-color" outcome="connect.xhtml">
                                 <h:outputText value="#{msg.connect}" />
                             </h:link>
-                        </c:when>
-                        <c:when test="#{clientMB.infosConnexion.connecte}">
-                            <h:link outcome="#{clientMB.editerClient()}">
-                                <h:outputText value="#{clientMB.client.email}" />
-                            </h:link>
-                            <h:link value="#{clientMB.deconnexion()}">
-                                <h:outputText value="#{msg.deconnexion}"/>
-                            </h:link>
-                        </c:when>
-                    </c:choose>
-                    <h:form>
-                        <c:forEach items="#{internationalizationMB.langues}" var="langue">
-                            <h:commandLink action="#{internationalizationMB.setLangueCourante(langue)}">
-                                <img src="resources/images/#{langue.abreviation}.png" height="20" title="#{langue.libelle}" />
-                            </h:commandLink>
-                        </c:forEach>
-                    </h:form>
-                </h:panelGrid>
-            </div>
-            <div id="topMenu">
+                        </li>
+                    </c:when>
+                    <c:when test="#{clientMB.infosConnexion.connecte}">
+                        <li role="presentation">
+                        <h:link class="white-font-color" outcome="#{clientMB.editerClient()}">
+                            <h:outputText value="#{clientMB.client.email}" />
+                        </h:link>
+                        </li>
+                        <li role="presentation">
+                        <h:link class="white-font-color" value="#{clientMB.deconnexion()}">
+                            <h:outputText value="#{msg.deconnexion}"/>
+                        </h:link>
+                        </li>
+                    </c:when>
+                </c:choose>
+                <h:form class="navbar-form navbar-left">
+                    <c:forEach items="#{internationalizationMB.langues}" var="langue">
+                        <h:commandLink action="#{internationalizationMB.setLangueCourante(langue)}">
+                            <img src="resources/images/#{langue.abreviation}.png" height="20" title="#{langue.libelle}" />
+                        </h:commandLink>
+                    </c:forEach>
+                </h:form>
+            </ul>
+        </ui:insert>
                 
-            </div>
-        </div>
-        <div>
+            <div>
             <div id="left">
                 <ui:insert name="left">
-                    
+                    <ul>
+                        <c:forEach items="#{categorieMB.categories}" var="categorie">
+                            <li style="list-style-type: none;">
+                                <h:link value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"
+                                        outcome="categorie.xhtml">
+                                    <f:param name="categorieID"
+                                             value="#{categorie.idCategorie}"/>
+                                </h:link>
+                            </li>
+                        </c:forEach>
+                    </ul>  
                 </ui:insert>
-                <ul>
-                    <c:forEach items="#{categorieMB.categories}" var="categorie">
-                        <li style="list-style-type: none;">
-                            <h:link value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"
-                                    outcome="categorie.xhtml">
-                                <f:param name="categorieID"
-                                         value="#{categorie.idCategorie}"/>
-                            </h:link>
-                        </li>
-                    </c:forEach>
-                </ul>
-
             </div>
             <div>
                 <div id="right">
@@ -93,7 +93,7 @@
         </div>
         <div id="bottom">
             <ui:insert name="bottom"/>
-            <!--<h:link id="aproposLien" value="#{msg.apropos}" outcome="descriptionEntreprise.xhtml"/>-->
+            <h:link id="aproposLien" value="#{msg.apropos}" outcome="descriptionEntreprise.xhtml"/>
              © Pierre Faniel et Guillaume de Wouters            
         </div>
         
