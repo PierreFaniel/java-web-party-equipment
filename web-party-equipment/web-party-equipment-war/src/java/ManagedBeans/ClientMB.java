@@ -32,6 +32,38 @@ public class ClientMB implements Serializable {
         infosConnexion = new InfosConnexion();
     }
     
+    public void essai() {
+        int i = 0;
+        while (i < 1000)
+        {
+        System.out.println("Essai concluant " + i);
+        i++;
+        }
+    }
+    
+    public String essaiDeux() {
+        return "Vilipende";
+    }
+    
+    public void inscription2(){
+        try{
+            testNumTel();
+            clientFacade.create(client, getBundle());
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+        try{
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("index.xhtml");
+        }
+        catch(IOException e){
+            System.out.println("error redirect.");            
+        }
+    }
+    
+    
+    
     public String inscription(){
         try{
             testNumTel();
@@ -152,7 +184,7 @@ public class ClientMB implements Serializable {
     }
     
     public String editionClient(){
-        //clientFacade.edit(clientFacade.converterToEntity(client));
+        //clientFacade.edit(clientFacade.converterToEntity(client)); TO DO
         return pagePrecedente;
     }
     

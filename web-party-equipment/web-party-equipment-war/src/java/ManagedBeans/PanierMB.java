@@ -60,7 +60,7 @@ public class PanierMB implements Serializable{
 //        }
 //        return (article.getPrixcatalogue() * (1-(pourcentagePromo/100))
 //                * panier.get(article).shortValue());
-        return (double)(article.getPrixcatalogue().shortValue() * panier.get(article).shortValue());
+        return (double) article.getPrixcatalogue().floatValue() * panier.get(article).shortValue();
 
     }
     
