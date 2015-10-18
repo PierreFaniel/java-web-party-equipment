@@ -6,13 +6,15 @@
     <body>
         <ui:composition template="./MainTemplate.xhtml">            
             <ui:define name="content">
-                <h1>#{msg.aProposTitre}</h1>
-                <p>#{msg.aProposTexte}</p>                
-                <p>
-                    <h4>#{msg.nousContacter}:</h4>
-                    <a href="mailto:pierrefaniel@live.be">party@equipment.com</a>
-                </p>
-                </ui:define>
+                <div class="col-md-offset-2 col-md-8">
+                     <h2 class="text-primary">#{msg.aProposTitre}</h2>
+                     <p class="text-justify">#{msg.aProposTexte}</p>                
+                    <p>
+                        <h4>#{msg.nousContacter}:</h4>
+                        <a href="mailto:pierrefaniel@live.be">party@equipment.com</a>
+                    </p>
+                </div>
+            </ui:define>
         </ui:composition>
     </body>
 </html>
