@@ -62,6 +62,7 @@ public class FactureFacade extends AbstractFacade<Facture> implements FactureFac
     
     @Override
     public void create(ResourceBundle bundle, Facture facture){
+//        facture.setIdFacture(getNewId());
         create(facture);
         em.flush();
         facture.setLignecommandeCollection(ajoutLignesCommande(facture));
@@ -78,8 +79,18 @@ public class FactureFacade extends AbstractFacade<Facture> implements FactureFac
 
     private void creerLigneCommande(Facture facture) {
         facture.getLignecommandeCollection().stream().forEach((ligneCmd) ->{
+            ligneCmd.setIdLignecommande(getNewId());
             lignecommandeFacade.create(ligneCmd);
         });
     }
     
+    @Override
+    public Integer getNewId(){
+        Query q = em.createQuery("SELECT Max(f.idFacture) FROM Facture f");
+        Integer id = (Integer)q.getSingleResult();
+        if (id == null)
+            return 1;
+        else
+            return (id + 1) ;
+    }
 }

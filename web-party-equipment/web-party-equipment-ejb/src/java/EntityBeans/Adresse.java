@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Adresse.findByRue", query = "SELECT a FROM Adresse a WHERE a.rue = :rue"),
     @NamedQuery(name = "Adresse.findByNumero", query = "SELECT a FROM Adresse a WHERE a.numero = :numero"),
     @NamedQuery(name = "Adresse.findByLocalite", query = "SELECT a FROM Adresse a WHERE a.localite = :localite"),
+    @NamedQuery(name = "Adresse.getMaxId", query = "SELECT Max(a.idAdresse) FROM Adresse a"),
     @NamedQuery(name = "Adresse.findByCodepostal", query = "SELECT a FROM Adresse a WHERE a.codepostal = :codepostal")})
 public class Adresse implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -9,6 +9,7 @@ import EntityBeans.Adresse;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,6 +23,16 @@ public class AdresseFacade extends AbstractFacade<Adresse> implements AdresseFac
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    @Override
+    public Integer getNewId(){
+        Query q = em.createQuery("SELECT Max(a.idAdresse) FROM Adresse a");
+        Integer id = (Integer)q.getSingleResult();
+        if (id == null)
+            return 1;
+        else
+            return (id + 1) ;
     }
 
     public AdresseFacade() {

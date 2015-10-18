@@ -30,4 +30,6 @@ public interface LignecommandeFacadeLocal {
 
     int count();
     
+    public Integer getNewId();
+    
 }

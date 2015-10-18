@@ -9,6 +9,7 @@ import EntityBeans.Lignecommande;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,4 +29,13 @@ public class LignecommandeFacade extends AbstractFacade<Lignecommande> implement
         super(Lignecommande.class);
     }
     
+    @Override
+    public Integer getNewId(){
+        Query q = em.createQuery("SELECT Max(l.idLignecommande) FROM Lignecommande l");
+        Integer id = (Integer)q.getSingleResult();
+        if (id == null)
+            return 1;
+        else
+            return (id + 1) ;
+    }    
 }

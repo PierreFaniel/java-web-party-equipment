@@ -30,4 +30,6 @@ public interface AdresseFacadeLocal {
 
     int count();
     
+    public Integer getNewId();
+    
 }

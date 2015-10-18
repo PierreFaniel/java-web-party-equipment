@@ -8,6 +8,7 @@ import SessionBeans.ClientFacadeLocal;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -27,42 +28,14 @@ public class ClientMB implements Serializable {
     private String pagePrecedente;
     
     public ClientMB() {
+    }
+    
+    @PostConstruct
+    public void init(){        
         client = new Client();
         client.setIdAdresse(new Adresse());
         infosConnexion = new InfosConnexion();
-    }
-    
-    public void essai() {
-        int i = 0;
-        while (i < 1000)
-        {
-        System.out.println("Essai concluant " + i);
-        i++;
-        }
-    }
-    
-    public String essaiDeux() {
-        return "Vilipende";
-    }
-    
-    public void inscription2(){
-        try{
-            testNumTel();
-            clientFacade.create(client, getBundle());
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
-        try{
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("index.xhtml");
-        }
-        catch(IOException e){
-            System.out.println("error redirect.");            
-        }
-    }
-    
-    
+    }    
     
     public String inscription(){
         try{

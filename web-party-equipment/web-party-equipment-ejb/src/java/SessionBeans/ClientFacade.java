@@ -41,10 +41,22 @@ public class ClientFacade extends AbstractFacade<Client> implements ClientFacade
     public void create(Client client, ResourceBundle bundle) throws Exception{
         client.setMotdepasse(Encryption.encryption(client.getMotdepasse()));
         Adresse adresse = client.getIdAdresse();
+        Integer newId = adresseFacade.getNewId();
+        adresse.setIdAdresse(newId);
         adresseFacade.create(adresse);
-        Client entity = client;
-        entity.setIdAdresse(adresse);
-        create(entity);
+        client.setIdAdresse(adresse);
+        client.setIdClient(getNewId());
+        create(client);
+    }
+    
+    @Override
+    public Integer getNewId(){
+        Query q = em.createQuery("SELECT Max(c.idClient) FROM Client c");
+        Integer id = (Integer)q.getSingleResult();
+        if (id == null)
+            return 1;
+        else
+            return (id + 1) ;
     }
     
     @Override

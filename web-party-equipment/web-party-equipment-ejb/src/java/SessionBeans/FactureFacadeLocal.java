@@ -36,4 +36,6 @@ public interface FactureFacadeLocal {
     
     void create(ResourceBundle bundle, Facture facture);
     
+    public Integer getNewId();
+    
 }
