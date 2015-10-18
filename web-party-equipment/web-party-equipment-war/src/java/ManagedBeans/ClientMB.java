@@ -2,7 +2,7 @@ package ManagedBeans;
 
 import EntityBeans.Adresse;
 import EntityBeans.Client;
-import EntityBeans.InfosConnexion;
+import Modele.InfosConnexion;
 import Modele.Encryption;
 import SessionBeans.ClientFacadeLocal;
 import java.io.IOException;

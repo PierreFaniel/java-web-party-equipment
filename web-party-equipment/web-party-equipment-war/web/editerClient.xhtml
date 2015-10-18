@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+        <ui:composition template="./MainTemplate.xhtml">
+            <ui:define name="content">
+                <c:if test="#{!clientMB.infosConnexion.connecte}">
+                    <f:event listener="#{clientMB.redirectionConnexion()}" 
+                             type="preRenderView"/>
+                </c:if>
+                <h2 class="text-primary text-center"><h:outputText value="#{msg.edition_titre}"/></h2>
+                <h:form id="formInscription">
+                    <div class=" row col-lg-12">
+                        <div id="informationClient" class="col-md-4 col-md-offset-2">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formEmail}</span>
+                                    <h:inputText id="inputEmail" class="form-control"
+                                                 maxlength="100"
+                                                 value="#{clientMB.client.email}"
+                                                 required="true"
+                                                 requiredMessage="#{msg.emailRequired}">
+                                        <f:ajax execute="inputEmail"
+                                                render="erreurEmail"
+                                                event="blur"/>
+                                        <f:validator validatorId="emailValidator"/>
+                                    </h:inputText></div>  
+                                <span class="text-warning">
+                                    <h:message id="erreurEmail" for="inputEmail"/>
+                                </span>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formMotDePasse}</span>
+                                    <h:inputSecret id="motDePasse" class="form-control"
+                                                   value="#{clientMB.client.motdepasse}"
+                                                   maxlength="50" required="true"
+                                                   binding="#{composantMotDePasse}"
+                                                   requiredMessage="#{msg.motDePasseRequis}"
+                                                   validatorMessage="#{msg.longueurMotDePasse}">
+                                        <f:validateLength minimum="6" maximum="50" /> 
+                                        <f:ajax execute="motDePasse confirmationMotDePasse"
+                                                render="erreurMotDePasse erreurConfirmationMotDePasse"
+                                                event="blur"/>
+                                    </h:inputSecret></div>
+                                <span class="text-warning">
+                                    <h:message id="erreurMotDePasse" for="motDePasse"/>
+                                </span>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formConfirmationMotDePasse}</span>
+                                    <h:inputSecret id="confirmationMotDePasse" class="form-control"
+                                                   maxlength="50" required="true"
+                                                   requiredMessage="#{msg.confirmationMotDePasseRequis}"> 
+                                        <f:ajax render="erreurConfirmationMotDePasse"
+                                                event="blur"/>   
+                                        <f:attribute name="composantMotDePasse"
+                                                     value="#{composantMotDePasse}"/>
+                                        <f:validator validatorId="confirmationMotDePasseValidator"/>
+                                    </h:inputSecret></div>
+                                <span class="text-warning">
+                                    <h:message id="erreurConfirmationMotDePasse" for="confirmationMotDePasse"/>
+                                </span>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formPrenom}</span>
+                                    <h:inputText id="prenom" class="form-control"
+                                                 value="#{clientMB.client.prenom}"
+                                                 maxlength="50" required="true"
+                                                 requiredMessage="#{msg.prenomRequis}"
+                                                 validatorMessage="#{msg.longueurPrenom}">
+                                        <f:validateLength minimum="2" maximum="50"/>
+                                        <f:validateRegex pattern="^\D{2,}$"/>
+                                        <f:ajax render="erreurPrenom" event="blur"/>
+                                    </h:inputText></div>
+                                <span class="text-warning">
+                                    <h:message id="erreurPrenom" for="prenom"/>
+                                </span>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formNom}</span>
+                                    <h:inputText id="nom" class="form-control"
+                                                 value="#{clientMB.client.nom}"
+                                                 maxlength="50" required="true"
+                                                 requiredMessage="#{msg.nomRequis}"
+                                                 validatorMessage="#{msg.longueurNom}">
+                                        <f:validateLength minimum="2" maximum="50"/>
+                                        <f:validateRegex pattern="^\D{2,}$"/>
+                                        <f:ajax render="erreurNom" event="blur"/>
+                                    </h:inputText>
+                                </div>
+                                <span class="text-warning">
+                                    <h:message id="erreurNom" for="nom"/>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formNumTelephone}</span>
+                                    <h:inputText id="numTelephone" class="form-control"
+                                                 value="#{clientMB.client.numtelephone}"
+                                                 validatorMessage="#{msg.erreurNumTelephone}">
+
+                                        <f:validator validatorId="numTelephoneValidator"/>
+                                        <f:ajax render="erreurNumTelephone" event="blur"/>
+                                    </h:inputText>
+                                </div>
+                                <span class="text-warning">
+                                    <h:message id="erreurNumTelephone" for="numTelephone"/>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="adresseClient" class="col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formRue}</span>
+                                    <h:inputText id="rue" class="form-control"
+                                                 value="#{clientMB.client.idAdresse.rue}"
+                                                 required="true" requiredMessage="#{msg.rueRequis}"
+                                                 >
+                                        <f:ajax render="erreurRue" event="blur"/>                            
+                                    </h:inputText>
+                                </div>
+
+                                <span class="text-warning">
+                                    <h:message id="erreurRue" for="rue"/>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formNumero}</span>
+                                    <h:inputText id="numero" class="form-control"
+                                                 value="#{clientMB.client.idAdresse.numero}"
+                                                 required="true" requiredMessage="#{msg.numeroRueRequis}"
+                                                 >
+                                        <f:ajax render="erreurNumero" event="blur"/>                            
+                                    </h:inputText>
+                                </div>
+                                <span class="text-warning">
+                                    <h:message id="erreurNumero" for="numero"/>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formLocalite}</span>
+                                    <h:inputText id="localite" class="form-control"
+                                                 value="#{clientMB.client.idAdresse.localite}"
+                                                 required="true" requiredMessage="#{msg.localiteRequis}"
+                                                 validatorMessage="#{msg.localiteCaracteresAutorises}" >
+                                        <f:validateRegex pattern="^[a-zA-z-]+$"/>
+                                        <f:ajax render="erreurLocalite" event="blur"/>                            
+                                    </h:inputText>                                    
+                                </div>
+
+                                <span class="text-warning">
+                                    <h:message id="erreurLocalite" for="localite"/>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">#{msg.formCodePostal}</span>
+                                    <h:inputText id="codePostal" class="form-control"
+                                                 value="#{clientMB.client.idAdresse.codepostal}"
+                                                 required="true" requiredMessage="#{msg.codePostalRequis}">
+                                        <f:ajax render="erreuCodePostal" event="blur"/>   
+                                    </h:inputText>
+                                </div>
+                                <span class="text-warning">
+                                    <h:message id="erreuCodePostal" for="codePostal"/>
+                                </span>
+
+                            </div>
+                            <div class="input-group col-lg-12">
+                                <h:outputLabel for="pays" value="#{msg.formPays}"/>
+                                <h:selectOneMenu id="pays" class="form-control"
+                                                 value="#{clientMB.client.idAdresse.idPays}">
+                                    <f:selectItems value="#{paysMB.pays}"
+                                                   var="pays"
+                                                   itemValue="#{pays}"
+                                                   itemLabel="#{pays.getLibelle(internationalizationMB.langueCourante)}"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-12 center-block">                           
+                        <h:commandButton class="btn btn-primary center-block" value="#{msg.boutonValider}"
+                                         
+                                         action="#{clientMB.editionClient()}"/>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

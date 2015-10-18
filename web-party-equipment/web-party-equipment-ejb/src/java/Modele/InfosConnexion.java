@@ -1,4 +1,4 @@
-package EntityBeans;
+package Modele;
 
 import java.io.Serializable;
 
