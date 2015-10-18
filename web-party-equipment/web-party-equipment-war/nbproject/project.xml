@@ -10,11 +10,11 @@
                     <file>${reference.web-party-equipment-ejb.dist}</file>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.cdi-api.jar}</file>
+                    <file>${file.reference.primefaces-5.2.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.primefaces-5.2.jar}</file>
+                    <file>${file.reference.cdi-api.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
