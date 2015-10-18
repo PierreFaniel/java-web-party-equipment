@@ -182,7 +182,7 @@
                                 </span>
 
                             </div>
-                            <div class="input-group col-lg-12">
+                            <div class="form-group col-lg-12">
                                 <h:outputLabel for="pays" value="#{msg.formPays}"/>
                                 <h:selectOneMenu id="pays" class="form-control"
                                                  value="#{clientMB.client.idAdresse.idPays}">
@@ -190,7 +190,12 @@
                                                    var="pays"
                                                    itemValue="#{pays}"
                                                    itemLabel="#{pays.getLibelle(internationalizationMB.langueCourante)}"/>
+                                    <f:ajax render="erreurPays" event="blur"/>
                                 </h:selectOneMenu>
+                                
+                                <span class="text-warning">
+                                    <h:message id="erreurPays" for="pays"/>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -198,7 +203,7 @@
 
                     <div class="col-lg-12 center-block">                           
                         <h:commandButton class="btn btn-primary center-block" value="#{msg.boutonValider}"
-                                         action="#{clientMB.inscription2()}"/>
+                                         action="#{clientMB.inscription()}"/>
                     </div>
                 </h:form>
             </ui:define>

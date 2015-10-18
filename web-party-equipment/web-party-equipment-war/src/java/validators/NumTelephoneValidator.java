@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package validator;
+package validators;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

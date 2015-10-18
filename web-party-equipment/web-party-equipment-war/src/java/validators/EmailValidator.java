@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package validator;
+package validators;
 
 import SessionBeans.ClientFacadeLocal;
 import java.util.Locale;

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package validator;
+package validators;
 
 import java.math.BigDecimal;
 import javax.faces.application.FacesMessage;

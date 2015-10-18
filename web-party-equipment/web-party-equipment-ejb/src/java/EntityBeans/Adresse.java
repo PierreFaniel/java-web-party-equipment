@@ -52,7 +52,7 @@ public class Adresse implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "NUMERO")
-    private short numero;
+    private Short numero;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -61,7 +61,7 @@ public class Adresse implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "CODEPOSTAL")
-    private int codepostal;
+    private Integer codepostal;
     @JoinColumn(name = "ID_PAYS", referencedColumnName = "ID_PAYS")
     @ManyToOne(optional = false)
     private Pays idPays;
@@ -75,7 +75,7 @@ public class Adresse implements Serializable {
         this.idAdresse = idAdresse;
     }
 
-    public Adresse(Integer idAdresse, String rue, short numero, String localite, int codepostal) {
+    public Adresse(Integer idAdresse, String rue, Short numero, String localite, Integer codepostal) {
         this.idAdresse = idAdresse;
         this.rue = rue;
         this.numero = numero;
@@ -99,11 +99,11 @@ public class Adresse implements Serializable {
         this.rue = rue;
     }
 
-    public short getNumero() {
+    public Short getNumero() {
         return numero;
     }
 
-    public void setNumero(short numero) {
+    public void setNumero(Short numero) {
         this.numero = numero;
     }
 
@@ -115,11 +115,11 @@ public class Adresse implements Serializable {
         this.localite = localite;
     }
 
-    public int getCodepostal() {
+    public Integer getCodepostal() {
         return codepostal;
     }
 
-    public void setCodepostal(int codepostal) {
+    public void setCodepostal(Integer codepostal) {
         this.codepostal = codepostal;
     }
 
