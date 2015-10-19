@@ -13,84 +13,94 @@
                 <ui:include src="categorieNav.xhtml"/>
             </ui:define>
             <ui:define name="content">
-                <h1>
+                <h2 class="text-primary">
                     <h:outputText value="#{msg.titrePanier}"/>
-                </h1>
+                </h2>
                 <c:if test="#{panierMB.panierVide()}">
-                    <h2>
+                    <h3 class="text-warning">
                         <h:outputText value="#{msg.panierVide}"/>
-                    </h2>
+                    </h3>
                 </c:if>
                 <c:if test="#{!panierMB.panierVide()}">
-                    <h:form id="formPanier">
-                        <p:dataTable id="tablePanier"
-                                     value="#{panierMB.listePanier}"
-                                     var="article" editable="true"
-                                     tableStyleClass="tablePanier" editMode="cell">
-                            <p:column headerText="#{msg.articlePanier}">
-                                <h:commandLink  action="#{panierMB.removeArticle(article.key)}"
-                                                style="color: firebrick">
-                                    <i class="fa fa-minus-circle"/>
-                                </h:commandLink>
-                                <h:outputText value=" #{article.key.getLibelle(internationalizationMB.langueCourante)}"/>
-                                 
-                            </p:column>
-                            <p:column headerText="#{msg.prixArticle}">                                
-                                <h:outputText value="#{article.key.prixcatalogue}">
-                                    <f:convertNumber/>
-                                </h:outputText>
-                                <h:outputText value=" &euro;"/>
-                            </p:column>
-                            <p:column headerText="#{msg.articleQuantite}">
-                                <p:spinner value="#{panierMB.panier[article.key]}" min="1" max="999" size="1">
-                                    <f:validator validatorId="nombreValidator"/>
-                                    <f:convertNumber/>
-                                    <f:ajax event="blur" render="@form"/>
-                                </p:spinner>
-                            </p:column>
-                            <p:column headerText="#{msg.prixTotalLigne}">
-                                <h:outputText value="#{panierMB.sommeLigne(article.key)}">
-                                    <f:convertNumber/>
-                                </h:outputText>
-                                <h:outputText value=" &euro;"/>
-                            </p:column>
-                        </p:dataTable>
-                        
-                        <div class="commander">
-                            <p>
-                                <h:outputText value="#{msg.prixTotalPanier}: "/>
-                                <span class="total">
-                                    <h:outputText value="#{panierMB.sommePanier()}">
-                                        <f:convertNumber maxFractionDigits="2" minFractionDigits="0"/>
+                    <div class="row col-md-12">
+                        <h:form id="formPanier">
+                            <p:dataTable id="tablePanier"
+                                         value="#{panierMB.listePanier}"
+                                         var="article" editable="true" editMode="cell">
+                                <p:column headerText="#{msg.articlePanier}">
+                                    <h:commandLink  action="#{panierMB.removeArticle(article.key)}"
+                                                    style="color: firebrick">
+                                        <i class="fa fa-minus-circle"/>
+                                    </h:commandLink>
+                                    <h:outputText value=" #{article.key.getLibelle(internationalizationMB.langueCourante)}"/>
+
+                                </p:column>
+                                <p:column headerText="#{msg.prixArticle}">                                
+                                    <h:outputText value="#{article.key.prixcatalogue}">
+                                        <f:convertNumber/>
                                     </h:outputText>
                                     <h:outputText value=" &euro;"/>
-                                </span>
-                            </p>
-                            <p>
-                                <h:outputLabel value="#{msg.code_promo_input}: " for="codepromo"/>
-                                <h:inputText size="10" value="#{panierMB.codePromo}" id="codepromo">
-                                    <f:validator validatorId="promotionValidator"/>
-                                    <f:ajax render="erreurCodePromo" event="blur"/>
-                                </h:inputText>
-                                <span class="messageErreur">
-                                    <h:message for="codepromo" id="erreurCodePromo"/>
-                                </span>
-                                
-                                <h:commandButton styleClass="boutonCommander" 
-                                             value="#{msg.validerCodePromo}"
-                                             action="#{panierMB.validerCodePromo()}"/>
-                            </p>
-                            <p>
-                                <h:commandButton value="#{msg.commanderPanier}"
-                                             styleClass="boutonCommander" 
-                                             immediate="true"
-                                             action="commande.xhtml"/>
-                            </p>
-                        </div>
-                    <h:commandButton styleClass="boutonCommander cornerLeft" value="#{msg.viderPanier}"
-                                     immediate="true"
-                                     action="#{panierMB.clearPanier()}"/>
-                    </h:form>
+                                </p:column>
+                                <p:column headerText="#{msg.articleQuantite}">
+                                    <p:spinner value="#{panierMB.panier[article.key]}" min="1" max="999" size="1">
+                                        <f:validator validatorId="nombreValidator"/>
+                                        <f:convertNumber/>
+                                        <f:ajax event="blur" render="@form"/>
+                                    </p:spinner>
+                                </p:column>
+                                <p:column headerText="#{msg.prixTotalLigne}">
+                                    <h:outputText value="#{panierMB.sommeLigne(article.key)}">
+                                        <f:convertNumber/>
+                                    </h:outputText>
+                                    <h:outputText value=" &euro;"/>
+                                </p:column>
+                            </p:dataTable>
+
+                            <div class="row col-md-12 mg-top-10">
+                                <div class="col-md-1">
+                                    <h:commandButton class="btn btn-danger" value="#{msg.viderPanier}"
+                                                     immediate="true"
+                                                     action="#{panierMB.clearPanier()}"/>
+                                </div>
+                                <div class="text-right col-md-3 col-md-offset-8">
+                                    <h4 class="text-info">
+                                        <h:outputText value="#{msg.prixTotalPanier}: "/>
+                                        <h:outputText value="#{panierMB.sommePanier()}">
+                                            <f:convertNumber maxFractionDigits="2" minFractionDigits="0"/>
+                                        </h:outputText>
+                                        <h:outputText value=" &euro;"/>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="row text-right col-md-12">
+                                <div class="form-group col-md-offset-8 col-md-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">#{msg.code_promo_input}</span>
+                                        <h:inputText size="10" value="#{panierMB.codePromo}" class="form-control" id="codepromo">
+                                            <f:validator validatorId="promotionValidator"/>
+                                            <f:ajax render="erreurCodePromo" event="blur"/>
+                                        </h:inputText>
+                                    </div>
+                                    <span class="text-danger">
+                                        <h:message for="codepromo" id="erreurCodePromo"/>
+                                    </span>
+                                </div>
+                                <div class="col-md-1">
+                                    <h:commandButton class="btn btn-default" 
+                                                     value="#{msg.validerCodePromo}"
+                                                     action="#{panierMB.validerCodePromo()}"/>
+                                </div>
+                            </div>
+                            <div class="row col-md-12 mg-top-10">
+                                <div class="col-md-1 col-md-offset-11">
+                                    <h:commandButton value="#{msg.commanderPanier}"
+                                                     class="btn btn-info"
+                                                     immediate="true"
+                                                     action="commande.xhtml"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>  
                 </c:if>
             </ui:define>
         </ui:composition>

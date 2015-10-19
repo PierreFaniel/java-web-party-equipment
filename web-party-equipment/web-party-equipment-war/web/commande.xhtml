@@ -15,49 +15,52 @@
                 <c:if test="#{panierMB.panierVide()}">
                     <f:event listener="#{clientMB.redirectionErreur()}" type="preRenderView"/>
                 </c:if>
-            <h1>#{msg.titreCommande}</h1>
-            <p:dataTable var="article" value="#{panierMB.listePanier}"
-                         tableStyleClass="tablePanier">
-                <p:column headerText="#{msg.articlePanier}">
-                    <h:outputText value="  #{article.key.getLibelle(internationalizationMB.langueCourante)} "/>
-                </p:column>
-                <p:column headerText="#{msg.prixArticle}">                                
-                    <h:outputText value="#{article.key.prixcatalogue}">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value=" &euro;"/>
-                </p:column>
-                <p:column headerText="#{msg.articleQuantite}">
-                    <h:outputText value="#{panierMB.panier[article.key]}">                        
-                        <f:convertNumber/>
-                    </h:outputText>
-                </p:column>
-                <p:column headerText="#{msg.prixTotalLigne}">
-                    <h:outputText value="#{panierMB.sommeLigne(article.key)}">
-                        <f:convertNumber/>
-                    </h:outputText>
-                    <h:outputText value=" &euro;"/>
-                </p:column>
-            </p:dataTable>
-            <div class="commander">
-                <p>
-                    <h:outputText value="#{msg.totalCommande}: "/>
-                    <span class="total">
-                        <h:outputText value="#{panierMB.sommePanier()}">
-                            <f:convertNumber maxFractionDigits="2" minFractionDigits="0"/>
-                        </h:outputText>
-                        <h:outputText value=" &euro;"/>
-                    </span>
-                </p>
-                <p>
-                    <h:link value="#{msg.commanderPanier}"
-                                 styleClass="boutonCommander"
-                                  outcome="confirmationCommande.xhtml"/>
-                </p>
-            </div>
+                <h2 class="text-primary">#{msg.titreCommande}</h2>
+                <div class="row col-md-12">
+                    <p:dataTable var="article" value="#{panierMB.listePanier}">
+                        <p:column headerText="#{msg.articlePanier}">
+                            <h:outputText value="  #{article.key.getLibelle(internationalizationMB.langueCourante)} "/>
+                        </p:column>
+                        <p:column headerText="#{msg.prixArticle}">                                
+                            <h:outputText value="#{article.key.prixcatalogue}">
+                                <f:convertNumber/>
+                            </h:outputText>
+                            <h:outputText value=" &euro;"/>
+                        </p:column>
+                        <p:column headerText="#{msg.articleQuantite}">
+                            <h:outputText value="#{panierMB.panier[article.key]}">                        
+                                <f:convertNumber/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="#{msg.prixTotalLigne}">
+                            <h:outputText value="#{panierMB.sommeLigne(article.key)}">
+                                <f:convertNumber/>
+                            </h:outputText>
+                            <h:outputText value=" &euro;"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+                <div class="row col-md-12 mg-top-10">
+                    <div class="col-md-offset-9 col-md-3">
+                        <h4 class="text-primary text-right">
+                            <h:outputText value="#{msg.totalCommande}: "/>
+                            <span class="total">
+                                <h:outputText value="#{panierMB.sommePanier()}">
+                                    <f:convertNumber maxFractionDigits="2" minFractionDigits="0"/>
+                                </h:outputText>
+                                <h:outputText value=" &euro;"/>
+                            </span>
+                        </h4>
+
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <div class="col-md-offset-11 col-md-1">
+                        <h:link value="#{msg.commanderPanier}" class="btn btn-info"
+                                outcome="confirmationCommande.xhtml"/>
+                    </div>
+                </div>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>
