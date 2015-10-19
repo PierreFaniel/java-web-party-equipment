@@ -12,14 +12,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 
 /**
  *
  * @author Pierre
  */
 @Named(value = "articleMB")
-@SessionScoped
+@ViewScoped
 public class ArticleMB implements Serializable {
     @EJB
     private ArticleFacadeLocal articleFacade;
