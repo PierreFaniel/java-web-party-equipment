@@ -14,27 +14,29 @@
                 <ui:include src="categorieNav.xhtml"/>
             </ui:define>
             <ui:define name="content">
-                <h2 class="text-primary"><h:outputText value="#{categorieMB.getCategorie(categorieMB.idCat).getLibelle(internationalizationMB.langueCourante)}"/></h2>
-                <h:dataTable class="col-md-5" value="#{articleMB.findArticleParCategorie(categorieMB.getCategorie(categorieMB.idCat))}"
-                             var="article">
-                    <h:column class="article_column">
-                        <h:link outcome="article.xhtml">
-                            <img class="mini_article_image" src="./resources/images/#{article.idArticle}.png"/>
-                            <f:param name="articleID" value="#{article.idArticle}"/>
-                        </h:link>                        
-                    </h:column>
-                    <h:column class="article_column">
-                        <f:facet name="header">#{msg.nomArticleTitreColonne}</f:facet>
-                        <h:outputText value="#{article.getLibelle(internationalizationMB.langueCourante)}"/>
-                    </h:column>
-                    <h:column class="article_column">
-                        <f:facet name="header">#{msg.prixArticleTitreColonne}</f:facet>
-                        <h:outputText value="#{article.prixcatalogue}">
-                            <f:convertNumber minFractionDigits="0" maxFractionDigits="2"/>
-                        </h:outputText>
-                        <h:outputText value=" &euro;"/>
-                    </h:column>      
-                </h:dataTable>
+                <div class="row col-md-offset-3 col-md-8">
+                    <h2 class="text-primary"><h:outputText value="#{categorieMB.getCategorie(categorieMB.idCat).getLibelle(internationalizationMB.langueCourante)}"/></h2>
+                    <h:dataTable class="col-md-9" value="#{articleMB.findArticleParCategorie(categorieMB.getCategorie(categorieMB.idCat))}"
+                                 var="article">
+                        <h:column class="article_column">
+                            <h:link outcome="article.xhtml">
+                                <img class="mini_article_image" src="./resources/images/#{article.idArticle}.png"/>
+                                <f:param name="articleID" value="#{article.idArticle}"/>
+                            </h:link>                        
+                        </h:column>
+                        <h:column class="article_column">
+                            <f:facet name="header">#{msg.nomArticleTitreColonne}</f:facet>
+                            <h:outputText value="#{article.getLibelle(internationalizationMB.langueCourante)}"/>
+                        </h:column>
+                        <h:column class="article_column">
+                            <f:facet name="header">#{msg.prixArticleTitreColonne}</f:facet>
+                            <h:outputText value="#{article.prixcatalogue}">
+                                <f:convertNumber minFractionDigits="0" maxFractionDigits="2"/>
+                            </h:outputText>
+                            <h:outputText value=" &euro;"/>
+                        </h:column>      
+                    </h:dataTable>
+                </div>
             </ui:define>
         </ui:composition>
 

@@ -2,7 +2,6 @@ package ManagedBeans;
 
 import EntityBeans.Adresse;
 import EntityBeans.Client;
-import Modele.InfosConnexion;
 import Modele.Encryption;
 import SessionBeans.ClientFacadeLocal;
 import java.io.IOException;
@@ -23,9 +22,9 @@ public class ClientMB implements Serializable {
     private ClientFacadeLocal clientFacade;
     
     private Client client;
-    private InfosConnexion infosConnexion;
-    private Adresse adresse;
-    private String pagePrecedente;
+    private String motDePasse = "";
+    private String email = "";
+    private boolean connecte = false;
     
     public ClientMB() {
     }
@@ -34,7 +33,6 @@ public class ClientMB implements Serializable {
     public void init(){        
         client = new Client();
         client.setIdAdresse(new Adresse());
-        infosConnexion = new InfosConnexion();
     }    
     
     public String inscription(){
@@ -44,7 +42,6 @@ public class ClientMB implements Serializable {
             return "inscriptionReussie";
         }
         catch (Exception e){
-            System.out.println(e);
             return "erreur";
         }
     }
@@ -53,10 +50,9 @@ public class ClientMB implements Serializable {
             client.setNumtelephone(null);
     }
         
-    public void deconnexion() throws IOException{
-        infosConnexion.setConnecte(false);
+    public void deconnexion(){
+        setConnecte(false);
         client = new Client();
-        retourIndex();
     } 
 
     public Client getClient() {
@@ -66,31 +62,6 @@ public class ClientMB implements Serializable {
     public void setClient(Client client) {
         this.client = client;
     }
-
-    public InfosConnexion getInfosConnexion() {
-        return infosConnexion;
-    }
-
-    public void setInfosConnexion(InfosConnexion infosConnexion) {
-        this.infosConnexion = infosConnexion;
-    }
-
-    public Adresse getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
-
-    public String getPagePrecedente() {
-        return pagePrecedente;
-    }
-
-    public void setPagePrecedente(String pagePrecedente) {
-        this.pagePrecedente = pagePrecedente;
-    }
-    
     
     public void retourIndex() throws IOException{
         try{
@@ -103,19 +74,14 @@ public class ClientMB implements Serializable {
     }
     
     public String connexion(){
-        client = clientFacade.findByEmail(infosConnexion.getEmail());
+        client = clientFacade.findByEmail(email);
     
-        if(infosConnexonCorrectes()) {
-            infosConnexion.setConnecte(true);
-            infosConnexion.setEmail("");
-            if(pageActuelle().equals("connect.xhtml"))
-                return pagePrecedente;
-            return "";
+        if(infosConnexionCorrectes()) {
+            setConnecte(true);
+            return "index";
         }
         else
         {
-            if(!pageActuelle().equals("connect.xhtml"))
-                pagePrecedente = pageActuelle();
             return "connect";
         }
     }
@@ -140,10 +106,10 @@ public class ClientMB implements Serializable {
         }
     }
     
-    private boolean infosConnexonCorrectes() {
-        String motDePasse = Encryption.encryption(
-                infosConnexion.getMotDePasse());
-        return client != null && motDePasse.equals(
+    private boolean infosConnexionCorrectes() {
+        String mdp = Encryption.encryption(
+                motDePasse);
+        return client != null && mdp.equals(
                 client.getMotdepasse());
     }
     
@@ -152,13 +118,12 @@ public class ClientMB implements Serializable {
     }
      
     public String editerClient(){
-        pagePrecedente = pageActuelle();
         return "editerClient";        
     }
     
     public String editionClient(){
-        //clientFacade.edit(clientFacade.converterToEntity(client)); TO DO
-        return pagePrecedente;
+        //clientFpagePrecedenteacade.edit(clientFacade.converterToEntity(client)); TO DO
+        return "index";
     }
     
     private ResourceBundle getBundle() {
@@ -166,4 +131,28 @@ public class ClientMB implements Serializable {
                 FacesContext.getCurrentInstance().getViewRoot().getLocale());
     
     }    
+
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isConnecte() {
+        return connecte;
+    }
+
+    public void setConnecte(boolean connecte) {
+        this.connecte = connecte;
+    }
 }

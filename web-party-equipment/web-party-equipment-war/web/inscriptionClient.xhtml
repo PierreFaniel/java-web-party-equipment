@@ -9,7 +9,7 @@
     <body>
         <ui:composition template="./MainTemplate.xhtml">
             <ui:define name="content">
-                <c:if test="#{clientMB.infosConnexion.connecte}">
+                <c:if test="#{clientMB.connecte}">
                     <f:event listener="#{clientMB.retourIndex()}" 
                              type="preRenderView"/>
                 </c:if>

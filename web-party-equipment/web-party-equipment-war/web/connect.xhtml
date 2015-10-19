@@ -9,7 +9,7 @@
     <body>
         <ui:composition template="./MainTemplate.xhtml">
             <ui:define name="content">
-                <c:if test="#{clientMB.infosConnexion.connecte}">
+                <c:if test="#{clientMB.connecte}">
                     <f:event listener="#{clientMB.retourIndex()}" 
                              type="preRenderView"/>
                 </c:if>
@@ -24,7 +24,7 @@
                                          required="true"
                                          maxlength="100"
                                          requiredMessage="#{msg.emailRequired}"
-                                         value="#{clientMB.infosConnexion.email}">
+                                         value="#{clientMB.email}">
                                 <f:ajax render="erreurEmail" event="blur"/>
                             </h:inputText></div>
                             <span class="text-warning">
@@ -39,7 +39,7 @@
                                          required="true"
                                          maxlength="50"
                                          requiredMessage="#{msg.motDePasseRequis}"
-                                         value="#{clientMB.infosConnexion.motDePasse}">
+                                         value="#{clientMB.motDePasse}">
                                 <f:ajax render="erreurMotDePasse" event="blur"/>
                             </h:inputSecret>
                             </div>

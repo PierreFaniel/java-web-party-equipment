@@ -20,6 +20,7 @@
         <h:body>
             <ui:insert name="top">
                 <nav class="navbar navbar-inverse">
+                    <h:form>
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
@@ -40,27 +41,25 @@
                                         <i class="fa fa-home fa-1-5x" title="#{msg.welcomePage}"/>
                                     </h:link>
                                 </li>
-                                <c:choose>
-                                    <c:when test="#{!clientMB.infosConnexion.connecte}">
-                                        <li class="navbar-li">
-                                            <h:link outcome="connect.xhtml">
-                                                <h:outputText value="#{msg.connect}" />
-                                            </h:link>
-                                        </li>
-                                    </c:when>
-                                    <c:when test="#{clientMB.infosConnexion.connecte}">
-                                        <li class="navbar-li">
-                                            <h:link outcome="#{clientMB.editerClient()}">
-                                                <h:outputText value="#{clientMB.client.email}" />
-                                            </h:link>
-                                        </li>
-                                        <li class="navbar-li">
-                                            <h:link value="#{clientMB.deconnexion()}">
+                                <c:if test="#{!clientMB.connecte}">
+                                    <li class="navbar-li">
+                                        <h:link outcome="connect.xhtml">
+                                            <h:outputText value="#{msg.connect}" />
+                                        </h:link>
+                                    </li>
+                                </c:if>
+                                <c:if test="#{clientMB.connecte}">
+                                    <li class="navbar-li">
+                                        <h:link outcome="editerClient.xhtml">
+                                            <h:outputText value="#{clientMB.client.email}" />
+                                        </h:link>
+                                    </li>
+                                    <li class="navbar-li">
+                                            <h:commandLink action="#{clientMB.deconnexion()}"> 
                                                 <h:outputText value="#{msg.deconnexion}"/>
-                                            </h:link>
-                                        </li>
-                                    </c:when>
-                                </c:choose>
+                                            </h:commandLink>
+                                    </li>
+                                </c:if>
                                 <li class="dropdown navbar-li">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msg.titreCategories}<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
@@ -75,7 +74,6 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <h:form>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="navbar-li">
                                         <h:link title="#{msg.goBasket}" outcome="panier.xhtml">
@@ -85,20 +83,21 @@
                                     <li class="dropdown navbar-li">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msg.languesTitre}<span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                           <c:forEach items="#{internationalizationMB.langues}" var="langue">
-                                        <li>
-                                            <h:commandLink action="#{internationalizationMB.setLangueCourante(langue)}">
-                                                <img src="resources/images/#{langue.abreviation}.png" height="12" title="#{langue.libelle}" />
-                                                <h:outputText value=" #{langue.libelle}"/>
-                                            </h:commandLink>
-                                        </li>
-                                    </c:forEach>
+                                            <c:forEach items="#{internationalizationMB.langues}" var="langue">
+                                                <li>
+                                                    <h:commandLink action="#{internationalizationMB.setLangueCourante(langue)}">
+                                                        <img src="resources/images/#{langue.abreviation}.png" height="12" title="#{langue.libelle}" />
+                                                        <h:outputText value=" #{langue.libelle}"/>
+                                                    </h:commandLink>
+                                                </li>
+                                            </c:forEach>
                                         </ul>
                                     </li>
-                                    
-                                </ul></h:form>
+
+                                </ul>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
+                    </h:form>
                 </nav>
 
 

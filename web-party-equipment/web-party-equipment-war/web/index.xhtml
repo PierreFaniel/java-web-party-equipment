@@ -14,15 +14,16 @@
             </ui:define>
 
             <ui:define name="content">
-                <section id="promotions">
-                    <c:set var="amountOfPromos" value="#{promotionMB.promotions.size()}"/>
+                <div id="promotions" class="row col-md-12">
+                    <div class="col-md-offset-3 col-lg-6">
+                        <c:set var="amountOfPromos" value="#{promotionMB.promotions.size()}"/>
                         <c:if test="${amountOfPromos != 0}">
-                            <h1>
+                            <h2 class="text-primary">
                                 <h:outputText value="#{msg.promotionsOfTheMoment}"/>
-                            </h1>                            
+                            </h2>                            
                         </c:if>
                         
-                    <h:panelGrid columns="5">
+                    
                         <c:forEach items="#{promotionMB.promotions}" var="promotion">
                             <h:link outcome="article.xhtml"
                                 class="classe_promo">
@@ -40,8 +41,8 @@
                             |
                             <h:outputText value="#{promotion.codepromo}"/>
                         </c:forEach>
-                    </h:panelGrid>
-                </section>
+                    </div>
+                </div>
                     
             </ui:define>
 
