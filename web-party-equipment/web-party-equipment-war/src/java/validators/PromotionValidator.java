@@ -77,10 +77,8 @@ public class PromotionValidator implements Validator {
         }
     }
     
-        private boolean articleNonPresent(Article article) {
-        //for (Article article : getPanier().getListePanier().)
-        //return getPanier().getPanier().get(article) == null;
-        return false;
+        private boolean articleNonPresent(Article articlePromo) {
+        return getPanier().getPanier().get(articlePromo) == null;
     }
      
     private PanierMB getPanier(){
