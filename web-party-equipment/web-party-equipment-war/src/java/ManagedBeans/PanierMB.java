@@ -122,10 +122,10 @@ public class PanierMB implements Serializable{
     }
     
     public void removeArticlePromo(Article article){
-        for(Promotion promo : promotions){
-//            if(article.getId().equals(promo.getArticleEnPromo().getId()))
-//                promotions.remove(promo);
-        }
+        /*for(Promotion promo : promotions){
+            if(article.getIdArticle().equals(promo.getIdArticle().getIdArticle()))
+                promotions.remove(promo);
+        } TO DO */ 
     }
 
     private void goToCommande() throws IOException{
