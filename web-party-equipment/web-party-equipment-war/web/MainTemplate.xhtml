@@ -21,60 +21,61 @@
             <ui:insert name="top">
                 <nav class="navbar navbar-inverse">
                     <h:form>
-                    <div class="container-fluid">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <span class="navbar-brand">Party Equipment</span>
-                        </div>
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <span class="navbar-brand">Party Equipment</span>
+                            </div>
 
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav">
-                                <li class="navbar-li">
-                                    <h:link title="#{msg.goMainPage}" outcome="index.xhtml">
-                                        <i class="fa fa-home fa-1-5x" title="#{msg.welcomePage}"/>
-                                    </h:link>
-                                </li>
-                                <c:if test="#{!clientMB.connecte}">
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
                                     <li class="navbar-li">
-                                        <h:link outcome="connect.xhtml">
-                                            <h:outputText value="#{msg.connect}" />
+                                        <h:link title="#{msg.goMainPage}" outcome="index.xhtml">
+                                            <i class="fa fa-home fa-1-5x" title="#{msg.welcomePage}"/>
                                         </h:link>
                                     </li>
-                                </c:if>
-                                <c:if test="#{clientMB.connecte}">
-                                    <li class="navbar-li">
-                                        <h:link outcome="editerClient.xhtml">
-                                            <h:outputText value="#{clientMB.client.email}" />
-                                        </h:link>
+                                    <li class="dropdown navbar-li">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msg.titreCategories}<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <c:forEach items="#{categorieMB.categories}" var="categorie">
+                                                <li>
+                                                    <h:link outcome="categorie.xhtml">
+                                                        <f:param name="categorieID" value="#{categorie.idCategorie}"/>
+                                                        <h:outputText value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"/>
+                                                    </h:link>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
                                     </li>
-                                    <li class="navbar-li">
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+
+                                    <c:if test="#{!clientMB.connecte}">
+                                        <li class="navbar-li">
+                                            <h:link outcome="connect.xhtml">
+                                                <h:outputText value="#{msg.connect}" />
+                                            </h:link>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="#{clientMB.connecte}">
+                                        <li class="navbar-li">
+                                            <h:link outcome="editerClient.xhtml">
+                                                <h:outputText value="#{clientMB.client.email}" />
+                                            </h:link>
+                                        </li>
+                                        <li class="navbar-li">
                                             <h:commandLink action="#{clientMB.deconnexion()}"> 
                                                 <h:outputText value="#{msg.deconnexion}"/>
                                             </h:commandLink>
-                                    </li>
-                                </c:if>
-                                <li class="dropdown navbar-li">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msg.titreCategories}<span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <c:forEach items="#{categorieMB.categories}" var="categorie">
-                                            <li>
-                                                <h:link outcome="categorie.xhtml">
-                                                    <f:param name="categorieID" value="#{categorie.idCategorie}"/>
-                                                    <h:outputText value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"/>
-                                                </h:link>
-                                            </li>
-                                        </c:forEach>
-                                    </ul>
-                                </li>
-                            </ul>
-                                <ul class="nav navbar-nav navbar-right">
+                                        </li>
+                                    </c:if>
                                     <li class="navbar-li">
                                         <h:link title="#{msg.goBasket}" outcome="panier.xhtml">
                                             <i class="fa fa-shopping-cart fa-1-5x" title="#{msg.basket}"/>
@@ -95,8 +96,8 @@
                                     </li>
 
                                 </ul>
-                        </div><!-- /.navbar-collapse -->
-                    </div><!-- /.container-fluid -->
+                            </div><!-- /.navbar-collapse -->
+                        </div><!-- /.container-fluid -->
                     </h:form>
                 </nav>
 
