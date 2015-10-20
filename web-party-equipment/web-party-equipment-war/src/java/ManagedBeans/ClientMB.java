@@ -28,7 +28,7 @@ public class ClientMB implements Serializable {
     private Client client;
     private String motDePasse = "";
     private String email = "";
-    private boolean connecte = false;
+    private boolean connecte;
     private Adresse nouvelleAdresse;
     private Client copieClient;
     
@@ -39,6 +39,7 @@ public class ClientMB implements Serializable {
     public void init(){        
         client = new Client();
         client.setIdAdresse(new Adresse());
+        setConnecte(false);
     }    
     
     public String inscription(){
@@ -57,9 +58,7 @@ public class ClientMB implements Serializable {
     }
         
     public String deconnexion(){
-        setConnecte(false);
-        client = new Client();
-        client.setIdAdresse(new Adresse());
+        init();
         return "index";
     } 
 
@@ -132,6 +131,9 @@ public class ClientMB implements Serializable {
     }    
 
     public String supprimerCompte(){
+        adresseFacade.remove(client.getIdAdresse());
+        clientFacade.remove(client);
+        init();
         return "index";
     }  
     
