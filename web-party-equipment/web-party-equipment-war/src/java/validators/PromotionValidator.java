@@ -35,7 +35,8 @@ public class PromotionValidator implements Validator {
 
     private static final String BUNDLE_LOCALE = "language.lang",
                                 PROMO_DEJA_UTILISEE = "promoDejaUtilisee",
-                                PROMO_INCORRECTE = "promoIncorrecte"; 
+                                PROMO_INCORRECTE = "promoIncorrecte",
+                                ARTCICLE_NON_PRESENT = "articleNonPresent"; 
    
     PromotionFacadeLocal promotionFacade = lookupPromotionFacadeLocal();
     private Promotion promotion;
@@ -52,10 +53,10 @@ public class PromotionValidator implements Validator {
                     throw new ValidatorException(
                             new FacesMessage(linkToBundle(context).getString(PROMO_DEJA_UTILISEE)));
                 }else{
-//                    if(articleNonPresent(promotion.getArticleEnPromo())){
+                    if(articleNonPresent(promotion.getIdArticle())){
                         throw new ValidatorException(
-                            new FacesMessage(linkToBundle(context).getString(PROMO_INCORRECTE)));
-//                    }
+                            new FacesMessage(linkToBundle(context).getString(ARTCICLE_NON_PRESENT)));
+                    }
                 }
             }
         }
@@ -75,6 +76,12 @@ public class PromotionValidator implements Validator {
             return false;
         }
     }
+    
+        private boolean articleNonPresent(Article article) {
+        //for (Article article : getPanier().getListePanier().)
+        //return getPanier().getPanier().get(article) == null;
+        return false;
+    }
      
     private PanierMB getPanier(){
         FacesContext context = FacesContext.getCurrentInstance();
@@ -93,10 +100,6 @@ public class PromotionValidator implements Validator {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
-    }
-
-    private boolean articleNonPresent(Article article) {
-        return getPanier().getPanier().get(article) == null;
     }
     
     protected ResourceBundle linkToBundle(FacesContext context){
