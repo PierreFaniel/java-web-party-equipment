@@ -3,6 +3,7 @@ package ManagedBeans;
 import EntityBeans.Adresse;
 import EntityBeans.Client;
 import Modele.Encryption;
+import SessionBeans.AdresseFacadeLocal;
 import SessionBeans.ClientFacadeLocal;
 import java.io.IOException;
 import java.io.Serializable;
@@ -20,6 +21,9 @@ public class ClientMB implements Serializable {
  
     @EJB
     private ClientFacadeLocal clientFacade;
+    
+    @EJB
+    private AdresseFacadeLocal adresseFacade;
     
     private Client client;
     private String motDePasse = "";
@@ -133,6 +137,10 @@ public class ClientMB implements Serializable {
     
     }    
 
+    public String supprimerCompte(){
+        return "clientSupprime";
+    }  
+    
     public String getMotDePasse() {
         return motDePasse;
     }

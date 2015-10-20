@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./MainTemplate.xhtml">
+            <ui:define name="content">
+                <c:if test="#{!clientMB.connecte}">
+                    <f:event listener="#{clientMB.redirectionConnexion()}" 
+                             type="preRenderView"/>
+                </c:if>
+                <h2 class="text-center text-primary">
+                    <h:outputText value="#{msg.monCompte}"/>
+                </h2>
+                <div class="row col-md-12">
+                    <div id="infosClient" class="col-md-offset-4 col-md-6">
+                        <div class="row col-md-12">
+                            <div class="col-md-9">    
+                                <h4 class="text-info">
+                                    <h:outputText value="#{msg.mesInformations}"/>
+                                </h4>
+                            </div>
+
+                            <div class="col-md-3">   
+                                <h:link class="btn btn-info" outcome="editerInfosClient.xhtml">
+                                    <h:outputText value="#{msg.editerInformations}"/>
+                                </h:link>
+                            </div>
+                        </div><table class="col-md-offset-1 mg-top-10">
+                            <tr>
+                                <td class="col-md-2">
+                                    <h:outputLabel  value=" #{msg.formEmail}: " for="email"/>
+                                </td>
+                                <td class="col-md-2">
+                                    <h:outputText id="email" value=" #{clientMB.client.email}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-2">
+                                    <h:outputLabel value="#{msg.formPrenom}: " for="prenom"/>
+                                </td>
+                                <td class="col-md-2">
+                                    <h:outputText id="prenom" value=" #{clientMB.client.prenom}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-2">
+                                    <h:outputLabel value="#{msg.formNom}: " for="nom"/>
+                                </td>
+                                <td class="col-md-2">
+                                    <h:outputText id="nom" value=" #{clientMB.client.nom}"/><br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-2">
+                                    <h:outputLabel value="#{msg.formNumTelephone}: " for="numTelephone"/>
+                                </td>
+                                <td class="col-md-2">
+                                    <h:outputText id="numTelephone" value=" #{clientMB.client.numtelephone}"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="row col-md-12">
+                    <div id="adresseClient" class="col-md-offset-4 col-md-6">
+                        <div class="row col-md-12">
+                            <div class="col-md-9">    
+                                <h4 class="text-info">
+                                    <h:outputText value="#{msg.monAdresse}"/>
+                                </h4>
+                            </div>
+
+                            <div class="col-md-3">   
+                                <h:link class="btn btn-info" outcome="editerAdresse.xhtml">
+                                    <h:outputText value="#{msg.editerAdresse}"/>
+                                </h:link>
+                            </div>
+                        </div>
+                        <table class="col-md-offset-1 mg-top-10">
+                            <tr>
+                                <td class="col-md-2">
+                                    <h:outputLabel  value=" #{msg.formRue}: " for="rue"/>
+                                </td>
+                                <td class="col-md-4">
+                                    <h:outputText id="rue" value="#{clientMB.client.idAdresse.rue}, #{clientMB.client.idAdresse.numero}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-2">
+                                    <h:outputLabel  value=" #{msg.formLocalite}: " for="localite"/>
+                                </td>
+                                <td class="col-md-4">
+                                    <h:outputText id="localite" value="#{clientMB.client.idAdresse.localite} - #{clientMB.client.idAdresse.codepostal} "/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="mg-top-10 row col-md-12">
+                        <div class="col-md-offset-6">
+                        <h:link class="text-center btn btn-info" outcome="editerMotDePasse.xhtml">
+                            <h:outputText value="#{msg.editerPassword}"/>
+                        </h:link></div>
+                    </div>
+                    <div class="mg-top-10 row col-md-12">
+                        <h:form>
+                            <h:commandLink class="col-md-offset-6 btn btn-warning" onclick="return confirm('#{msg.confirmSuppressionCompte}')" action="#{clientMB.supprimerCompte()}">
+                                <h:outputText value="#{msg.supprimerCompte}"/>
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
