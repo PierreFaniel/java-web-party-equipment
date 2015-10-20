@@ -53,6 +53,7 @@ public class ClientMB implements Serializable {
     public void deconnexion(){
         setConnecte(false);
         client = new Client();
+        client.setIdAdresse(new Adresse());
     } 
 
     public Client getClient() {
