@@ -29,6 +29,8 @@ public class ClientMB implements Serializable {
     private String motDePasse = "";
     private String email = "";
     private boolean connecte = false;
+    private Adresse nouvelleAdresse;
+    private Client copieClient;
     
     public ClientMB() {
     }
@@ -54,10 +56,11 @@ public class ClientMB implements Serializable {
             client.setNumtelephone(null);
     }
         
-    public void deconnexion(){
+    public String deconnexion(){
         setConnecte(false);
         client = new Client();
         client.setIdAdresse(new Adresse());
+        return "index";
     } 
 
     public Client getClient() {
@@ -121,15 +124,6 @@ public class ClientMB implements Serializable {
      public String pageActuelle(){
         return FacesContext.getCurrentInstance().getViewRoot().getViewId();
     }
-     
-    public String editerClient(){
-        return "editerClient";        
-    }
-    
-    public String editionClient(){
-        //clientFpagePrecedenteacade.edit(clientFacade.converterToEntity(client)); TO DO
-        return "index";
-    }
     
     private ResourceBundle getBundle() {
             return ResourceBundle.getBundle(BUNDLE_LOCALE, 
@@ -138,7 +132,7 @@ public class ClientMB implements Serializable {
     }    
 
     public String supprimerCompte(){
-        return "clientSupprime";
+        return "index";
     }  
     
     public String getMotDePasse() {
@@ -163,5 +157,62 @@ public class ClientMB implements Serializable {
 
     public void setConnecte(boolean connecte) {
         this.connecte = connecte;
+    }
+
+    public Adresse getNouvelleAdresse() {
+        return nouvelleAdresse;
+    }
+
+    public void setNouvelleAdresse(Adresse nouvelleAdresse) {
+        this.nouvelleAdresse = nouvelleAdresse;
+    }
+
+    public Client getCopieClient() {
+        return copieClient;
+    }
+
+    public void setCopieClient(Client copieClient) {
+        this.copieClient = copieClient;
+    }
+    
+    public String editerInformationsClient(){
+        copieClient = copierClient(client);
+        return "editerInfosClient";
+    }
+    
+    public String changerInformationsClient(){
+        clientFacade.edit(copieClient);
+        client = copierClient(copieClient);
+        return "clientActions";
+    }
+    
+    private Client copierClient (Client oldClient){
+        Client clientCopy = new Client();
+        clientCopy.setEmail(oldClient.getEmail());
+        clientCopy.setMotdepasse(oldClient.getMotdepasse());
+        clientCopy.setNom(oldClient.getNom());
+        clientCopy.setPrenom(oldClient.getPrenom());
+        clientCopy.setIdAdresse(oldClient.getIdAdresse());
+        clientCopy.setIdClient(oldClient.getIdClient());
+        clientCopy.setNumtelephone(oldClient.getNumtelephone());
+        return clientCopy;
+    }
+    
+    
+    public String changerAdresse(){
+        adresseFacade.edit(nouvelleAdresse);
+        client.setIdAdresse(nouvelleAdresse);
+        return "clientActions";
+    }
+    
+    public String editerAdresse(){
+        nouvelleAdresse = new Adresse();
+        nouvelleAdresse.setIdAdresse(client.getIdAdresse().getIdAdresse());
+        nouvelleAdresse.setIdPays(client.getIdAdresse().getIdPays());
+        nouvelleAdresse.setCodepostal(client.getIdAdresse().getCodepostal());
+        nouvelleAdresse.setLocalite(client.getIdAdresse().getLocalite());
+        nouvelleAdresse.setRue(client.getIdAdresse().getRue());
+        nouvelleAdresse.setNumero(client.getIdAdresse().getNumero());
+        return "editerAdresse";
     }
 }

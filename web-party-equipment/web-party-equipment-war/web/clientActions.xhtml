@@ -17,7 +17,7 @@
                     <h:outputText value="#{msg.monCompte}"/>
                 </h2>
                 <div class="row col-md-12">
-                    <div id="infosClient" class="col-md-offset-4 col-md-6">
+                    <div id="infosClient" class="col-md-offset-3 col-md-6">
                         <div class="row col-md-12">
                             <div class="col-md-9">    
                                 <h4 class="text-info">
@@ -26,9 +26,11 @@
                             </div>
 
                             <div class="col-md-3">   
-                                <h:link class="btn btn-info" outcome="editerInfosClient.xhtml">
-                                    <h:outputText value="#{msg.editerInformations}"/>
-                                </h:link>
+                                <h:form>
+                                    <h:commandLink class="btn btn-info" action="#{clientMB.editerInformationsClient()}">
+                                        <h:outputText value="#{msg.editerInformations}"/>
+                                    </h:commandLink>
+                                </h:form>
                             </div>
                         </div><table class="col-md-offset-1 mg-top-10">
                             <tr>
@@ -69,7 +71,7 @@
                 <br/>
 
                 <div class="row col-md-12">
-                    <div id="adresseClient" class="col-md-offset-4 col-md-6">
+                    <div id="adresseClient" class="col-md-offset-3 col-md-6">
                         <div class="row col-md-12">
                             <div class="col-md-9">    
                                 <h4 class="text-info">
@@ -78,9 +80,11 @@
                             </div>
 
                             <div class="col-md-3">   
-                                <h:link class="btn btn-info" outcome="editerAdresse.xhtml">
-                                    <h:outputText value="#{msg.editerAdresse}"/>
-                                </h:link>
+                                <h:form>
+                                    <h:commandLink class="btn btn-info" action="#{clientMB.editerAdresse()}">
+                                        <h:outputText value="#{msg.editerAdresse}"/>
+                                    </h:commandLink>
+                                </h:form>
                             </div>
                         </div>
                         <table class="col-md-offset-1 mg-top-10">
@@ -102,20 +106,17 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="mg-top-10 row col-md-12">
-                        <div class="col-md-offset-6">
-                        <h:link class="text-center btn btn-info" outcome="editerMotDePasse.xhtml">
+                </div>
+                    <div class="mg-top-10 row col-md-12 text-center">
+                        <h:link class="btn btn-info" outcome="editerMotDePasse.xhtml">
                             <h:outputText value="#{msg.editerPassword}"/>
-                        </h:link></div>
-                    </div>
-                    <div class="mg-top-10 row col-md-12">
+                        </h:link>
                         <h:form>
-                            <h:commandLink class="col-md-offset-6 btn btn-warning" onclick="return confirm('#{msg.confirmSuppressionCompte}')" action="#{clientMB.supprimerCompte()}">
+                            <h:commandLink class="mg-top-10 btn btn-default" onclick="return confirm('#{msg.confirmSuppressionCompte}')" action="#{clientMB.supprimerCompte()}">
                                 <h:outputText value="#{msg.supprimerCompte}"/>
                             </h:commandLink>
                         </h:form>
                     </div>
-                </div>
             </ui:define>
         </ui:composition>
     </body>
