@@ -51,16 +51,14 @@ public class PanierMB implements Serializable{
     }
     
     public Double sommeLigne(Article article){
-//        Integer pourcentagePromo = 0;
-//        for(Promotion promo : promotions){
-//            if(promo.getArticleEnPromo().getId().equals(article.getId())){
-//                pourcentagePromo =  promo.getPourcentage();
-//                break;
-//            }
-//        }
-//        return (article.getPrixcatalogue() * (1-(pourcentagePromo/100))
-//                * panier.get(article).shortValue());
-        return (double) article.getPrixcatalogue().floatValue() * panier.get(article).shortValue();
+        Long pourcentagePromo = 0L;
+        for(Promotion promo : promotions){
+            if(promo.getIdArticle().getIdArticle().equals(article.getIdArticle())){
+                pourcentagePromo =  promo.getPourcentage();
+                break;
+            }
+        }
+        return (1-(pourcentagePromo/100.0)) * (double) article.getPrixcatalogue().floatValue() * panier.get(article).shortValue();
 
     }
     
