@@ -54,6 +54,9 @@
                                             </c:forEach>
                                         </ul>
                                     </li>
+                                    <li class="navbar-li">
+                                        <h:link value="#{msg.promotionsOfTheMoment}" outcome="promotions.xhtml"/>
+                                    </li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
 
@@ -110,8 +113,6 @@
             </div>
             <div id="right">
                 <ui:insert name="right">
-
-                    <h:link value="#{msg.promotionsOfTheMoment}" outcome="promotions.xhtml"/> 
                 </ui:insert>
             </div>
             <div id="content" class="right_content">

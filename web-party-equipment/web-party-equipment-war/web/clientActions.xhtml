@@ -110,6 +110,9 @@
                     <div class="mg-top-10 row col-md-12 text-center">
                         <h:link class="btn btn-info" outcome="editerMotDePasse.xhtml">
                             <h:outputText value="#{msg.editerPassword}"/>
+                        </h:link><br/>
+                        <h:link class="mg-top-10 btn btn-danger" outcome="listeFacture.xhtml">
+                            <h:outputText value="#{msg.mesFactures}"/>
                         </h:link>
                         <h:form>
                             <h:commandLink class="mg-top-10 btn btn-default" onclick="return confirm('#{msg.confirmSuppressionCompte}')" action="#{clientMB.supprimerCompte()}">

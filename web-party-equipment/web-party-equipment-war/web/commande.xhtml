@@ -56,8 +56,11 @@
                 </div>
                 <div class="row col-md-12">
                     <div class="col-md-offset-11 col-md-1">
-                        <h:link value="#{msg.commanderPanier}" class="btn btn-info"
-                                outcome="confirmationCommande.xhtml"/>
+                        <h:form>
+                            <h:commandLink value="#{msg.commanderPanier}" class="btn btn-info"
+                                           action="#{panierMB.validerCommande()}"/>
+                        </h:form>
+                        
                     </div>
                 </div>
             </ui:define>

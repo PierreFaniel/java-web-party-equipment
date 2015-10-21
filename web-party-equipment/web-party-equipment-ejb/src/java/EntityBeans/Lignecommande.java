@@ -47,6 +47,10 @@ public class Lignecommande implements Serializable {
     @NotNull
     @Column(name = "QUANTITE")
     private short quantite;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "PRIXLIGNE")
+    private Double prixLigne;
     @JoinColumn(name = "ID_ARTICLE", referencedColumnName = "ID_ARTICLE")
     @ManyToOne(optional = false)
     private Article idArticle;
@@ -61,10 +65,11 @@ public class Lignecommande implements Serializable {
         this.idLignecommande = idLignecommande;
     }
 
-    public Lignecommande(Integer idLignecommande, BigDecimal prixarticle, short quantite) {
+    public Lignecommande(Integer idLignecommande, BigDecimal prixarticle, short quantite, Double prixLigne) {
         this.idLignecommande = idLignecommande;
         this.prixarticle = prixarticle;
         this.quantite = quantite;
+        this.prixLigne = prixLigne;
     }
 
     public Integer getIdLignecommande() {
@@ -106,6 +111,15 @@ public class Lignecommande implements Serializable {
     public void setIdFacture(Facture idFacture) {
         this.idFacture = idFacture;
     }
+
+    public Double getPrixLigne() {
+        return prixLigne;
+    }
+
+    public void setPrixLigne(Double prixLigne) {
+        this.prixLigne = prixLigne;
+    }
+    
 
     @Override
     public int hashCode() {

@@ -32,10 +32,12 @@ public interface FactureFacadeLocal {
 
     int count();
     
-    ArrayList<Facture> findParClient(Integer idClient) throws Exception;
+    public ArrayList<Facture> findParClient(Integer idClient);
     
     void create(ResourceBundle bundle, Facture facture);
     
     public Integer getNewId();
+    
+    public Facture getFactureById(Integer id);
     
 }

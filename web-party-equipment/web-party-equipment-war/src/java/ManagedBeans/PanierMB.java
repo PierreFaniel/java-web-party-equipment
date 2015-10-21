@@ -6,6 +6,8 @@
 package ManagedBeans;
 
 import EntityBeans.Article;
+import EntityBeans.Client;
+import EntityBeans.Facture;
 import EntityBeans.Lignecommande;
 import EntityBeans.Promotion;
 import SessionBeans.FactureFacadeLocal;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,8 +144,8 @@ public class PanierMB implements Serializable{
     
     public String validerCommande(){
         try{
-//            Facture facture = creationFacture();
-//            factureFacade.create(getBundle(), facture);
+            Facture facture = creationFacture();
+            factureFacade.create(getBundle(), facture);
             clearPanier();
             return "commandeEffectuee";
         }
@@ -151,23 +154,24 @@ public class PanierMB implements Serializable{
         }        
     }
 
-//    private Facture creationFacture() {
-//        FacesContext ctxt = FacesContext.getCurrentInstance();
-//        ClientMB clientManaged = (ClientMB) ctxt.getApplication().getExpressionFactory()
-//                .createValueExpression(ctxt.getELContext(),"#{clientMB}",ClientMB.class)
-//                .getValue(ctxt.getELContext());
-//        Client client = clientManaged.getClient();
-//        Facture facture = new Facture(null, new Date(),
-//                client.getAdresse(), client);
-////        facture.setLignesCmd(conversionLigneCommande());
-////        facture.setPromotions(promotions);
-//        return facture;
-//    }
+    private Facture creationFacture() {
+        FacesContext ctxt = FacesContext.getCurrentInstance();
+        ClientMB clientManaged = (ClientMB) ctxt.getApplication().getExpressionFactory()
+                .createValueExpression(ctxt.getELContext(),"#{clientMB}",ClientMB.class)
+                .getValue(ctxt.getELContext());
+        Client client = clientManaged.getClient();
+        Facture facture = new Facture();
+        facture.setIdClient(client);
+        facture.setDatefacturation(new Date());
+        facture.setLignecommandeCollection(conversionLigneCommande());
+        return facture;
+    }
     
     private ArrayList<Lignecommande> conversionLigneCommande() {
         ArrayList<Lignecommande> lignes = new ArrayList<>();
         panier.forEach((article,quantite)->{
-//            lignes.add(new Lignecommande(article.getIdArticle(),article.getPrixcatalogue(), quantite.intValue(), article));
+            lignes.add(new Lignecommande(article.getIdArticle(),article.getPrixcatalogue(),
+                    quantite.shortValue(), sommeLigne(article)));
         });
         return lignes;
     }

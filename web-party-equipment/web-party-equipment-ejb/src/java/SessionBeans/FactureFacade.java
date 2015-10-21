@@ -45,7 +45,7 @@ public class FactureFacade extends AbstractFacade<Facture> implements FactureFac
     }
     
     @Override
-    public ArrayList<Facture> findParClient(Integer idClient) throws Exception{
+    public ArrayList<Facture> findParClient(Integer idClient){
         try{
             Query query = em.createNamedQuery("Facture.findByIdClient");
             query.setParameter("idClient", idClient);
@@ -56,17 +56,17 @@ public class FactureFacade extends AbstractFacade<Facture> implements FactureFac
             return factures;
         }
         catch(NoResultException e){
-            return null;
+            return new ArrayList<Facture>();
         }
     }
     
     @Override
     public void create(ResourceBundle bundle, Facture facture){
-//        facture.setIdFacture(getNewId());
+        facture.setIdFacture(getNewId());
         create(facture);
         em.flush();
         facture.setLignecommandeCollection(ajoutLignesCommande(facture));
-        creerLigneCommande(facture);
+        creerLignesCommande(facture);
     }
 
     private Collection<Lignecommande> ajoutLignesCommande(Facture facture) {
@@ -77,7 +77,7 @@ public class FactureFacade extends AbstractFacade<Facture> implements FactureFac
         return lignesCommande;
     }
 
-    private void creerLigneCommande(Facture facture) {
+    private void creerLignesCommande(Facture facture) {
         facture.getLignecommandeCollection().stream().forEach((ligneCmd) ->{
             ligneCmd.setIdLignecommande(getNewId());
             lignecommandeFacade.create(ligneCmd);
@@ -92,5 +92,17 @@ public class FactureFacade extends AbstractFacade<Facture> implements FactureFac
             return 1;
         else
             return (id + 1) ;
+    }
+    
+    @Override
+    public Facture getFactureById(Integer id){
+        try{
+            Query q = em.createNamedQuery("Facture.findByIdClient");
+            q.setParameter("idFacture", id);
+            return (Facture)q.getSingleResult();
+        }
+        catch(NoResultException e){
+            return null;
+        }
     }
 }

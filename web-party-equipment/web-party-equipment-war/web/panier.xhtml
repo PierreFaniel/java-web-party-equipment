@@ -13,13 +13,13 @@
                 <ui:include src="categorieNav.xhtml"/>
             </ui:define>
             <ui:define name="content">
-                <h2 class="text-primary">
+                <h2 class="text-center text-primary">
                     <h:outputText value="#{msg.titrePanier}"/>
                 </h2>
                 <c:if test="#{panierMB.panierVide()}">
-                    <h3 class="text-warning">
+                    <h4 class="text-center text-warning">
                         <h:outputText value="#{msg.panierVide}"/>
-                    </h3>
+                    </h4>
                 </c:if>
                 <c:if test="#{!panierMB.panierVide()}">
                     <div class="row col-md-12">
@@ -58,7 +58,7 @@
 
                             <div class="row col-md-12 mg-top-10">
                                 <div class="col-md-1">
-                                    <h:commandButton class="btn btn-danger" value="#{msg.viderPanier}"
+                                    <h:commandButton class="btn btn-primary" value="#{msg.viderPanier}"
                                                      immediate="true"
                                                      action="#{panierMB.clearPanier()}"/>
                                 </div>
@@ -86,7 +86,7 @@
                                     </span>
                                 </div>
                                 <div class="col-md-1">
-                                    <h:commandButton class="btn btn-default" 
+                                    <h:commandButton class="btn btn-info" 
                                                      value="#{msg.validerCodePromo}"
                                                      action="#{panierMB.validerCodePromo()}"/>
                                 </div>
@@ -94,7 +94,7 @@
                             <div class="row col-md-12 mg-top-10">
                                 <div class="col-md-1 col-md-offset-11">
                                     <h:commandButton value="#{msg.commanderPanier}"
-                                                     class="btn btn-info"
+                                                     class="btn btn-success"
                                                      immediate="true"
                                                      action="commande.xhtml"/>
                                 </div>
