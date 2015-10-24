@@ -10,8 +10,11 @@
     <body>
 
         <ui:composition template="./MainTemplate.xhtml">
-
             <ui:define name="content">
+                <c:if test="#{!clientMB.connecte}">
+                    <f:event listener="#{clientMB.redirectionConnexion()}" 
+                             type="preRenderView"/>
+                </c:if>
                 <c:if test="#{panierMB.panierVide()}">
                     <f:event listener="#{clientMB.redirectionErreur()}" type="preRenderView"/>
                 </c:if>
@@ -60,7 +63,7 @@
                             <h:commandLink value="#{msg.commanderPanier}" class="btn btn-info"
                                            action="#{panierMB.validerCommande()}"/>
                         </h:form>
-                        
+
                     </div>
                 </div>
             </ui:define>

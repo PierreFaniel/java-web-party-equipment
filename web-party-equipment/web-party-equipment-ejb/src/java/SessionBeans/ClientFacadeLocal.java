@@ -33,8 +33,6 @@ public interface ClientFacadeLocal {
     
     void create(Client client, ResourceBundle bundle) throws Exception;
     
-    public Integer getNewId();
-    
     Client findByEmail(String email);
     
 }

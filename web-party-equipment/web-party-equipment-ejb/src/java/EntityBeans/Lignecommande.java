@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,9 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Lignecommande.findByQuantite", query = "SELECT l FROM Lignecommande l WHERE l.quantite = :quantite")})
 public class Lignecommande implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID_LIGNECOMMANDE")
     private Integer idLignecommande;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -65,8 +66,8 @@ public class Lignecommande implements Serializable {
         this.idLignecommande = idLignecommande;
     }
 
-    public Lignecommande(Integer idLignecommande, BigDecimal prixarticle, short quantite, Double prixLigne) {
-        this.idLignecommande = idLignecommande;
+    public Lignecommande(Article article, BigDecimal prixarticle, short quantite, Double prixLigne) {
+        idArticle = article;
         this.prixarticle = prixarticle;
         this.quantite = quantite;
         this.prixLigne = prixLigne;

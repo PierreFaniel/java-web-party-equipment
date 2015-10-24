@@ -2,22 +2,70 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <f:metadata>
         <f:viewParam name="factureID" value="#{factureMB.idFac}"/>
-        <f:event listener="#{factureMB.initFactureById(factureMB.idFac)}"
-                 type="preRenderView"/>
     </f:metadata>
 
     <body>
-
         <ui:composition template="./MainTemplate.xhtml">
-
             <ui:define name="content">
-                
+                <div class="row col-md-12">
+                    <h2 class="text-center text-primary">
+                        <h:outputText value="#{msg.facture}#{factureMB.idFac} - "/>
+                        <h:outputText value="#{factureMB.facture.datefacturation}"/>
+                    </h2>
+                    <div class="col-md-3">
+                        <h:outputText value="#{factureMB.facture.idClient.prenom} #{factureMB.facture.idClient.nom}"/><br/>
+                        <h:outputText value="#{factureMB.facture.idClient.idAdresse.rue}, #{factureMB.facture.idClient.idAdresse.numero}"/><br/>
+                        <h:outputText value="#{factureMB.facture.idClient.idAdresse.localite} - #{factureMB.facture.idClient.idAdresse.codepostal}"/><br/>
+                        <h:outputText value="#{factureMB.facture.idClient.idAdresse.idPays.getLibelle(internationalizationMB.langueCourante)}"/>
+                    </div>
+                    <div class="col-md-7">
+                        <table class="table table-striped text-center">
+                            <thead>
+                                <th>
+                                    <h:outputLabel value="#{msg.articlePanier}"/>
+                                </th>
+                                <th>
+                                    <h:outputLabel value="#{msg.prixArticle}"/>
+                                </th>
+                                <th>
+                                    <h:outputLabel value="#{msg.libelleQuantite}"/>
+                                </th>
+                                <th>
+                                    <h:outputLabel value="#{msg.prixTotalLigne}"/>
+                                </th>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="#{factureMB.facture.lignecommandeCollection}"
+                                   var="ligne">
+                                    <tr>
+                                        <td>
+                                            <h:outputText value="#{ligne.idArticle.getLibelle(internationalizationMB.langueCourante)}"/>
+                                        </td>
+                                        <td>
+                                            <h:outputText value="#{ligne.prixarticle} €"/>
+                                        </td>
+                                        <td>
+                                            <h:outputText value="#{ligne.quantite}"/>
+                                        </td>
+                                        <td>
+                                            <h:outputText value="#{ligne.prixLigne} €"/>
+                                        </td>
+                                    </tr>
+                                    
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <h4 class="text-right text-primary">
+                            <h:outputText value="#{msg.totalCommande}: #{factureMB.totalFacture} €"/>
+                        </h4>
+                    </div>
+                </div>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

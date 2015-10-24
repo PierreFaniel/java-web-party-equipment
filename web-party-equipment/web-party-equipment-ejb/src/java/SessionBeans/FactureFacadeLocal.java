@@ -5,8 +5,11 @@
  */
 package SessionBeans;
 
+import EntityBeans.Client;
 import EntityBeans.Facture;
+import EntityBeans.Lignecommande;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.Local;
@@ -32,11 +35,9 @@ public interface FactureFacadeLocal {
 
     int count();
     
-    public ArrayList<Facture> findParClient(Integer idClient);
+    public ArrayList<Facture> findParClient(Client client);
     
-    void create(ResourceBundle bundle, Facture facture);
-    
-    public Integer getNewId();
+    void create(ArrayList<Lignecommande> lignesCommande, Facture facture);
     
     public Facture getFactureById(Integer id);
     

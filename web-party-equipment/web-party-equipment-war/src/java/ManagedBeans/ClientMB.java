@@ -45,6 +45,7 @@ public class ClientMB implements Serializable {
     public String inscription(){
         try{
             testNumTel();
+            adresseFacade.create(client.getIdAdresse());
             clientFacade.create(client, getBundle());
             return "inscriptionReussie";
         }

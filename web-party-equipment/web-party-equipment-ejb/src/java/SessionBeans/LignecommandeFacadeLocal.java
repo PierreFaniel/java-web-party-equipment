@@ -29,7 +29,4 @@ public interface LignecommandeFacadeLocal {
     List<Lignecommande> findRange(int[] range);
 
     int count();
-    
-    public Integer getNewId();
-    
 }

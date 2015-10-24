@@ -142,16 +142,26 @@ public class PanierMB implements Serializable{
     }
     
     
-    public String validerCommande(){
+    public void validerCommande(){
         try{
             Facture facture = creationFacture();
-            factureFacade.create(getBundle(), facture);
+            factureFacade.create(conversionLigneCommande(), facture);
             clearPanier();
-            return "commandeEffectuee";
+            FacesContext.getCurrentInstance().getExternalContext().redirect(
+            "facture.xhtml?factureID=" + facture.getIdFacture());
         }
         catch(Exception e){
-            return "erreur";
+            redirectToPage("erreur.xhtml");
         }        
+    }
+    
+    public void redirectToPage(String page){
+        try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect(page);
+        }
+        catch(Exception e){
+            System.out.println("Error redirect");
+        }
     }
 
     private Facture creationFacture() {
@@ -163,14 +173,14 @@ public class PanierMB implements Serializable{
         Facture facture = new Facture();
         facture.setIdClient(client);
         facture.setDatefacturation(new Date());
-        facture.setLignecommandeCollection(conversionLigneCommande());
+        facture.setLignecommandeCollection(new ArrayList<>());
         return facture;
     }
     
     private ArrayList<Lignecommande> conversionLigneCommande() {
         ArrayList<Lignecommande> lignes = new ArrayList<>();
         panier.forEach((article,quantite)->{
-            lignes.add(new Lignecommande(article.getIdArticle(),article.getPrixcatalogue(),
+            lignes.add(new Lignecommande(article,article.getPrixcatalogue(),
                     quantite.shortValue(), sommeLigne(article)));
         });
         return lignes;

@@ -28,14 +28,4 @@ public class LignecommandeFacade extends AbstractFacade<Lignecommande> implement
     public LignecommandeFacade() {
         super(Lignecommande.class);
     }
-    
-    @Override
-    public Integer getNewId(){
-        Query q = em.createQuery("SELECT Max(l.idLignecommande) FROM Lignecommande l");
-        Integer id = (Integer)q.getSingleResult();
-        if (id == null)
-            return 1;
-        else
-            return (id + 1) ;
-    }    
 }

@@ -5,11 +5,10 @@
  */
 package SessionBeans;
 
+import EntityBeans.Client;
 import EntityBeans.Facture;
 import EntityBeans.Lignecommande;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -45,10 +44,10 @@ public class FactureFacade extends AbstractFacade<Facture> implements FactureFac
     }
     
     @Override
-    public ArrayList<Facture> findParClient(Integer idClient){
+    public ArrayList<Facture> findParClient(Client client){
         try{
             Query query = em.createNamedQuery("Facture.findByIdClient");
-            query.setParameter("idClient", idClient);
+            query.setParameter("idClient", client);
             ArrayList<Facture> factures = new ArrayList();
             query.getResultList().stream().forEach((facture) ->{
                 factures.add((Facture)facture);
@@ -61,48 +60,35 @@ public class FactureFacade extends AbstractFacade<Facture> implements FactureFac
     }
     
     @Override
-    public void create(ResourceBundle bundle, Facture facture){
-        facture.setIdFacture(getNewId());
+    public void create(ArrayList<Lignecommande> lignesCommande, Facture facture){
         create(facture);
         em.flush();
-        facture.setLignecommandeCollection(ajoutLignesCommande(facture));
+        attachFactureToLignes(facture, lignesCommande);
+        facture.setLignecommandeCollection(lignesCommande);
         creerLignesCommande(facture);
     }
 
-    private Collection<Lignecommande> ajoutLignesCommande(Facture facture) {
-        ArrayList<Lignecommande> lignesCommande = new ArrayList<>();
-        facture.getLignecommandeCollection().stream().forEach((ligneCmd) ->{
-            lignesCommande.add(ligneCmd);
-        });
-        return lignesCommande;
-    }
-
     private void creerLignesCommande(Facture facture) {
-        facture.getLignecommandeCollection().stream().forEach((ligneCmd) ->{
-            ligneCmd.setIdLignecommande(getNewId());
-            lignecommandeFacade.create(ligneCmd);
-        });
-    }
-    
-    @Override
-    public Integer getNewId(){
-        Query q = em.createQuery("SELECT Max(f.idFacture) FROM Facture f");
-        Integer id = (Integer)q.getSingleResult();
-        if (id == null)
-            return 1;
-        else
-            return (id + 1) ;
+        for(Lignecommande ligne: facture.getLignecommandeCollection()){
+            lignecommandeFacade.create(ligne);
+        }
     }
     
     @Override
     public Facture getFactureById(Integer id){
         try{
-            Query q = em.createNamedQuery("Facture.findByIdClient");
+            Query q = em.createNamedQuery("Facture.findByIdFacture");
             q.setParameter("idFacture", id);
             return (Facture)q.getSingleResult();
         }
         catch(NoResultException e){
             return null;
+        }
+    }
+
+    private void attachFactureToLignes(Facture facture, ArrayList<Lignecommande> lignesCommande) {
+        for(Lignecommande ligne: lignesCommande){
+            ligne.setIdFacture(facture);
         }
     }
 }

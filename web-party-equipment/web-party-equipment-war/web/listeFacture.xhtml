@@ -17,17 +17,18 @@
                     <h:outputText value="#{msg.mesFactures}"/>
                 </h2>
                 <div class="col-lg-12">
-                    <c:if test="#{factureMB.getListeFacture(clientMB.client.idClient).size() == 0}">
+                    <c:if test="#{factureMB.getListeFacture(clientMB.client).size() == 0}">
                         <h4 class="text-center text-warning">
                             #{msg.noFactures}
                         </h4>
                     </c:if>
-                    <c:if test="#{factureMB.getListeFacture(clientMB.client.idClient).size() > 0}">
+                    <c:if test="#{factureMB.getListeFacture(clientMB.client).size() > 0}">
                           <div class="list-group">
-                            <c:forEach items="#{factureMB.getListeFacture(clientMB.client.idClient)}" var="facture">
-                                <h:link type="button" outcome="index.xhtml" class="col-lg-4 col-lg-offset-4 btn list-group-item">
+                            <c:forEach items="#{factureMB.getListeFacture(clientMB.client)}" var="facture">
+                                <h:link type="button" outcome="facture.xhtml" class="col-lg-4 col-lg-offset-4 btn list-group-item">
+                                    <h:outputText class="col-lg-6" value="#{msg.facture}#{facture.idFacture}"/>
                                     <h:outputText class="col-lg-6" value="#{facture.datefacturation}"/>
-                                    <h:outputText class="col-lg-6" value="Facture ##{facture.idFacture}"/>
+                                    <f:param name="factureID" value="#{facture.idFacture}"/>
                                 </h:link>
                             </c:forEach>
                         </div>

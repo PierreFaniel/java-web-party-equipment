@@ -1,8 +1,9 @@
 package ManagedBeans;
 
+import EntityBeans.Client;
 import EntityBeans.Facture;
+import EntityBeans.Lignecommande;
 import SessionBeans.FactureFacadeLocal;
-import SessionBeans.LignecommandeFacadeLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.ejb.EJB;
@@ -20,8 +21,8 @@ public class FactureMB implements Serializable {
     public FactureMB() {
     }
     
-    public ArrayList<Facture> getListeFacture(Integer idClient){
-        return factureFacade.findParClient(idClient);
+    public ArrayList<Facture> getListeFacture(Client client){
+        return factureFacade.findParClient(client);
     }
     
     public Integer getIdFac() {
@@ -30,6 +31,7 @@ public class FactureMB implements Serializable {
 
     public void setIdFac(Integer idFac) {
         this.idFac = idFac;
+        setFacture(factureFacade.getFactureById(idFac));
     }
 
     public Facture getFacture() {
@@ -40,8 +42,12 @@ public class FactureMB implements Serializable {
         this.facture = facture;
     }
     
-    public void initFactureById(Integer id){
-        setFacture(factureFacade.getFactureById(id));
+    public Double getTotalFacture(){
+        Double totalFacture = 0.0;
+        for(Lignecommande ligneCommande: facture.getLignecommandeCollection()){
+            totalFacture += ligneCommande.getPrixLigne();
+        }
+        return totalFacture;
     }
            
 }
