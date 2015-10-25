@@ -6,20 +6,19 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <body>
-                    <ul class="nav nav-stacked">
-                        <c:forEach items="#{categorieMB.categories}" var="categorie">
-                            <li role="presentation">
-                                <h:link outcome="categorie.xhtml">
-                                    <f:param name="categorieID" value="#{categorie.idCategorie}"/>
-                                    <h:outputText value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"/>
-                                </h:link>
-                            </li>
-                        </c:forEach>
-                    </ul>
+        <ul class="nav nav-stacked">
+            <c:forEach items="#{categorieMB.categories}" var="categorie">
+                <li role="presentation">
+                    <h:link class="text-uppercase" outcome="categorie.xhtml">
+                        <f:param name="categorieID" value="#{categorie.idCategorie}"/>
+                        <h:outputText value="#{categorie.getLibelle(internationalizationMB.langueCourante)}"/>
+                    </h:link>
+                </li>
+            </c:forEach>
+        </ul>
     </body>
 </html>
