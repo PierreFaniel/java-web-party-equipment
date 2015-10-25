@@ -25,12 +25,6 @@ public class FactureFacade extends AbstractFacade<Facture> implements FactureFac
     @EJB
     private LignecommandeFacadeLocal lignecommandeFacade;
     
-    @EJB
-    private ClientFacadeLocal clientFacade;
-    
-    @EJB
-    private AdresseFacadeLocal adresseFacade;
-    
     @PersistenceContext(unitName = "web-party-equipment-ejbPU")
     private EntityManager em;
 

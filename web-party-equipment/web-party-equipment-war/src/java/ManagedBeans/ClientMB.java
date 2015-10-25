@@ -27,6 +27,7 @@ public class ClientMB implements Serializable {
     
     private Client client;
     private String motDePasse = "";
+    private String nouveauMotDePasse = "";
     private String email = "";
     private boolean connecte;
     private Adresse nouvelleAdresse;
@@ -46,6 +47,7 @@ public class ClientMB implements Serializable {
         try{
             testNumTel();
             clientFacade.create(client, getBundle());
+            setConnecte(true);
             return "inscriptionReussie";
         }
         catch (Exception e){
@@ -82,13 +84,13 @@ public class ClientMB implements Serializable {
     
     public String connexion(){
         client = clientFacade.findByEmail(email);
-    
         if(infosConnexionCorrectes()) {
             setConnecte(true);
             return "index";
         }
         else
         {
+            init();
             return "connect";
         }
     }
@@ -131,8 +133,9 @@ public class ClientMB implements Serializable {
     }    
 
     public String supprimerCompte(){
-        adresseFacade.remove(client.getIdAdresse());
+        Adresse adresseToRemove = client.getIdAdresse();
         clientFacade.remove(client);
+        adresseFacade.remove(adresseToRemove);
         init();
         return "index";
     }  
@@ -176,6 +179,14 @@ public class ClientMB implements Serializable {
     public void setCopieClient(Client copieClient) {
         this.copieClient = copieClient;
     }
+
+    public String getNouveauMotDePasse() {
+        return nouveauMotDePasse;
+    }
+
+    public void setNouveauMotDePasse(String nouveauMotDePasse) {
+        this.nouveauMotDePasse = nouveauMotDePasse;
+    }
     
     public String editerInformationsClient(){
         copieClient = copierClient(client);
@@ -215,6 +226,17 @@ public class ClientMB implements Serializable {
         nouvelleAdresse.setLocalite(client.getIdAdresse().getLocalite());
         nouvelleAdresse.setRue(client.getIdAdresse().getRue());
         nouvelleAdresse.setNumero(client.getIdAdresse().getNumero());
-        return "editerAdresse";
+        return "clientActions";
+    }
+    
+    public String changerMotDePasse(){
+        if (Encryption.encryption(motDePasse).equals(client.getMotdepasse())){
+            client.setMotdepasse(Encryption.encryption(nouveauMotDePasse));
+            clientFacade.edit(client);
+            return "motDePasseChangeSuccess";
+        }
+        else{
+            return "editerMotDePasse";
+        }
     }
 }
