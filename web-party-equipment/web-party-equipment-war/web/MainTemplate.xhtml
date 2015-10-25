@@ -42,7 +42,7 @@
                                         </h:link>
                                     </li>
                                     <li class="dropdown navbar-li">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msg.titreCategories}<span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msg.titreCategories}  <i class="fa fa-caret-square-o-down"/></a>
                                         <ul class="dropdown-menu">
                                             <c:forEach items="#{categorieMB.categories}" var="categorie">
                                                 <li>
@@ -67,6 +67,7 @@
                                             </h:link>
                                         </li>
                                     </c:if>
+
                                     <c:if test="#{clientMB.connecte}">
                                         <li class="navbar-li">
                                             <h:link outcome="clientActions.xhtml">
@@ -74,9 +75,39 @@
                                             </h:link>
                                         </li>
                                         <li class="navbar-li">
-                                            <h:commandLink action="#{clientMB.deconnexion()}"> 
-                                                <h:outputText value="#{msg.deconnexion}"/>
-                                            </h:commandLink>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-user fa-1-5x"></i>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+
+                                                    <h:commandLink action="#{clientMB.editerInformationsClient()}">
+                                                        <h:outputText value="#{msg.editerInformations}"/>
+                                                    </h:commandLink>
+                                                </li>
+                                                <li>
+
+                                                    <h:commandLink action="#{clientMB.editerAdresse()}">
+                                                        <h:outputText value="#{msg.editerAdresse}"/>
+                                                    </h:commandLink>
+                                                </li>
+
+                                                <li>
+                                                    <h:link outcome="editerMotDePasse.xhtml">
+                                                        <h:outputText value="#{msg.editerPassword}"/>
+                                                    </h:link>
+                                                </li>
+                                                <li>
+                                                    <h:link outcome="listeFacture.xhtml">
+                                                        <h:outputText value="#{msg.mesFactures}"/>
+                                                    </h:link>
+                                                </li>
+                                                <li>
+                                                    <h:commandLink action="#{clientMB.deconnexion()}"> 
+                                                        <h:outputText value="#{msg.deconnexion}"/>
+                                                    </h:commandLink>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </c:if>
                                     <li class="navbar-li">
@@ -85,7 +116,7 @@
                                         </h:link>
                                     </li>
                                     <li class="dropdown navbar-li">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msg.languesTitre}<span class="caret"></span></a>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{msg.languesTitre} <i class="fa fa-caret-square-o-down"/></a>
                                         <ul class="dropdown-menu">
                                             <c:forEach items="#{internationalizationMB.langues}" var="langue">
                                                 <li>

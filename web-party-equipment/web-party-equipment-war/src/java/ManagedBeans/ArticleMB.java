@@ -62,14 +62,6 @@ public class ArticleMB implements Serializable {
     public void setIdArt(Integer idArt) {
         this.idArt = idArt;
     }
-    
-    public ArticleFacadeLocal getArticleFacade() {
-        return articleFacade;
-    }
-
-    public void setArticleFacade(ArticleFacadeLocal articleFacade) {
-        this.articleFacade = articleFacade;
-    }
 
     public Integer getQuantiteArticle() {
         return quantiteArticle;
