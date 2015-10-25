@@ -46,7 +46,7 @@ public class Article implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRIXCATALOGUE")
-    private BigDecimal prixcatalogue;
+    private Double prixcatalogue;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idArticle")
     private Collection<Lignecommande> lignecommandeCollection;
     @JoinColumn(name = "ID_CATEGORIE", referencedColumnName = "ID_CATEGORIE")
@@ -64,7 +64,7 @@ public class Article implements Serializable {
         this.idArticle = idArticle;
     }
 
-    public Article(Integer idArticle, BigDecimal prixcatalogue) {
+    public Article(Integer idArticle, Double prixcatalogue) {
         this.idArticle = idArticle;
         this.prixcatalogue = prixcatalogue;
     }
@@ -77,11 +77,11 @@ public class Article implements Serializable {
         this.idArticle = idArticle;
     }
 
-    public BigDecimal getPrixcatalogue() {
+    public Double getPrixcatalogue() {
         return prixcatalogue;
     }
 
-    public void setPrixcatalogue(BigDecimal prixcatalogue) {
+    public void setPrixcatalogue(Double prixcatalogue) {
         this.prixcatalogue = prixcatalogue;
     }
 
