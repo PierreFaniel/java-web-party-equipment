@@ -16,16 +16,14 @@
             <ui:define name="content">
                 <div id="promotions" class="row col-md-12">
                     <div class="col-md-offset-3 col-lg-6">
-                        <c:set var="amountOfPromos" value="#{promotionMB.promotions.size()}"/>
-                        <c:if test="${amountOfPromos != 0}">
-                            <h2 class="text-primary">
-                                <h:outputText value="#{msg.promotionsOfTheMoment}"/>
-                            </h2>                            
-                        </c:if>
+                        <h2 class="text-primary">
+                            <h:outputText value="#{msg.promotionsOfTheMoment}"/>
+                        </h2> 
                         
                     
                         <c:forEach items="#{promotionMB.promotions}" var="promotion">
-                            <h:link outcome="article.xhtml"
+                            <div class="row col-md-12 mg-top-10">
+                                <h:link outcome="article.xhtml"
                                 class="classe_promo">
                                 <f:param name="articleID"
                                          value="#{promotion.idArticle.idArticle}"/>
@@ -40,6 +38,7 @@
                                 </h:outputText>
                             |
                             <h:outputText value="#{promotion.codepromo}"/>
+                            </div>
                         </c:forEach>
                     </div>
                 </div>
