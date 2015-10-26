@@ -17,6 +17,6 @@ public class DoubleConverter implements Converter {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value)
     {
-        return new DecimalFormat("#.##").format(value);
+        return new DecimalFormat("#.#").format(value);
     }
 }

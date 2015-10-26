@@ -9,9 +9,6 @@
 
     <body>
         <ui:composition template="./MainTemplate.xhtml">
-            <ui:define name="left">
-                <ui:include src="categorieNav.xhtml"/>
-            </ui:define>
             <ui:define name="content">
                 <h2 class="text-center text-primary">
                     <h:outputText value="#{msg.titrePanier}"/>
@@ -50,7 +47,7 @@
                                 </p:column>
                                 <p:column headerText="#{msg.prixTotalLigne}">
                                     <h:outputText value="#{panierMB.sommeLigne(article.key)}">
-                                        <f:convertNumber/>
+                                        <f:convertNumber maxFractionDigits="2"/>
                                     </h:outputText>
                                     <h:outputText value=" &euro;"/>
                                 </p:column>

@@ -12,6 +12,10 @@
     <body>
         <ui:composition template="./MainTemplate.xhtml">
             <ui:define name="content">
+                <c:if test="#{!clientMB.connecte}">
+                    <f:event listener="#{clientMB.redirectionConnexion()}" 
+                             type="preRenderView"/>
+                </c:if>
                 <div class="row col-md-12">
                     <h2 class="text-center text-primary">
                         <h:outputText value="#{msg.facture}#{factureMB.idFac} - "/>
@@ -41,27 +45,33 @@
                             </thead>
                             <tbody>
                                 <c:forEach items="#{factureMB.facture.lignecommandeCollection}"
-                                   var="ligne">
+                                           var="ligne">
                                     <tr>
                                         <td>
                                             <h:outputText value="#{ligne.idArticle.getLibelle(internationalizationMB.langueCourante)}"/>
                                         </td>
                                         <td>
-                                            <h:outputText value="#{ligne.prixarticle} €"/>
+                                            <span><h:outputText value="#{ligne.prixarticle}">
+                                                    <f:convertNumber maxFractionDigits="2"/>
+                                                </h:outputText> €</span>
                                         </td>
                                         <td>
                                             <h:outputText value="#{ligne.quantite}"/>
                                         </td>
                                         <td>
-                                            <h:outputText value="#{ligne.prixLigne} €"/>
+                                            <span><h:outputText value="#{ligne.prixLigne}">
+                                                    <f:convertNumber maxFractionDigits="2"/>
+                                                </h:outputText> €</span>
                                         </td>
                                     </tr>
-                                    
+
                                 </c:forEach>
                             </tbody>
                         </table>
                         <h4 class="text-right text-primary">
-                            <h:outputText value="#{msg.totalCommande}: #{factureMB.totalFacture} €"/>
+                            <span>#{msg.totalCommande}: <h:outputText value="#{factureMB.totalFacture}">
+                                    <f:convertNumber maxFractionDigits="2"/>
+                                </h:outputText> €</span>
                         </h4>
                     </div>
                 </div>

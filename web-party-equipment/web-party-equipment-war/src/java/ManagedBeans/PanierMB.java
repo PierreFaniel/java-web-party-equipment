@@ -57,11 +57,11 @@ public class PanierMB implements Serializable{
         Long pourcentagePromo = 0L;
         for(Promotion promo : promotions){
             if(promo.getIdArticle().getIdArticle().equals(article.getIdArticle())){
-                pourcentagePromo =  promo.getPourcentage();
+                pourcentagePromo = promo.getPourcentage();
                 break;
             }
         }
-        return (1-(pourcentagePromo/100.0)) * (double) article.getPrixcatalogue().floatValue() * panier.get(article).shortValue();
+        return (1-(pourcentagePromo/100.0)) * article.getPrixcatalogue().doubleValue() * panier.get(article).shortValue();
 
     }
     
